@@ -251,6 +251,14 @@ const ManageTeam = () => {
                     <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">Manage Team</h1>
                     <p className="text-gray-500 dark:text-gray-400 font-medium">Add or edit the minds behind the mission.</p>
                 </div>
+                
+                {/* Connection Status Warning */}
+                {!teamService._isFirebaseConfigured() && (
+                    <div className="bg-red-500/10 border-l-4 border-red-500 p-4 rounded bg-red-500/10 text-red-700 dark:text-red-400 w-full lg:w-auto text-sm animate-pulse">
+                        <strong className="block font-bold mb-1 flex items-center gap-2">⚠️ CAUTION: OFFLINE MODE</strong>
+                        Your Vercel environment variables are missing! Changes made here are only saving to your browser's local memory and won't appear on other devices. Please check your Vercel Settings.
+                    </div>
+                )}
                 <div className="flex flex-wrap gap-3">
                     <motion.button
                         whileHover={{ scale: 1.06, boxShadow: '0 0 30px rgba(249,115,22,0.5)' }}
