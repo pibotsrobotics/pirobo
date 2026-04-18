@@ -477,24 +477,32 @@ const UpcomingEvents = () => {
 
 const FAQ = () => {
     const faqData = [
-        { title: "Who can join your courses?", content: "Our courses are designed for students from school (Grade 6+) to college level. We have different modules tailored for different age groups and skill levels." },
-        { title: "Do you provide certificates?", content: "Yes, upon successful completion of any course, workshop, or internship, you will receive a verified certificate from Pi Robo." },
-        { title: "Is the internship paid?", content: "Our internships are primarily for learning and gaining industry exposure. Stipends are performance-based and awarded to top performers in the program." },
-        { title: "How do I register for a workshop?", content: "You can browse our upcoming workshops on the Events page and register directly by filling out the form." },
+        { title: "What exactly does Pi Robo offer?", content: "We offer comprehensive hands-on tech education in Robotics, Artificial Intelligence, Coding, and IoT. Our programs range from beginner-friendly workshops to advanced industry-level internships for school and college students." },
+        { title: "Do I need any prior coding or robotics experience?", content: "Not at all! Our curriculum is designed to accommodate everyone. We start with the absolute basics and guide you step-by-step through complex concepts using a 100% practical, hands-on approach." },
+        { title: "Are the classes online or offline?", content: "We offer a flexible hybrid learning model. You can join our interactive sessions online from anywhere, or attend our offline practical workshops at our highly equipped PiBots Makerhub in Mampad, Kerala." },
+        { title: "Will I get a certificate after completing a course?", content: "Absolutely. Upon successful completion of any course, workshop, or internship, you will receive a verifiable, industry-recognized certificate from Pi Robo to boost your resume." },
+        { title: "How does the Internship Program work?", content: "Our internship program gives you real-world experience working on live industry projects alongside expert mentors. Top performers are eligible for performance-based stipends and pre-placement offers." },
+        { title: "Can my school or college partner with Pi Robo?", content: "Yes! We actively collaborate with educational institutions across Kerala to integrate specialized robotics and AI modules directly into their curriculum. You can reach out to us via the Contact page for partnerships." },
     ];
 
     return (
-        <section className="py-24 bg-gray-50 dark:bg-gray-900/50 relative overflow-hidden z-10 border-t border-gray-200 dark:border-white/5 transition-colors duration-500">
-            <div className="container mx-auto px-4 md:px-6 max-w-3xl relative z-10">
+        <section className="py-24 bg-gray-50 dark:bg-black relative overflow-hidden z-10 border-t border-gray-200 dark:border-white/5 transition-colors duration-500">
+            {/* Background elements */}
+            <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-orange-500/5 rounded-full blur-[100px] -translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
+
+            <div className="container mx-auto px-4 md:px-6 max-w-4xl relative z-10">
                 <motion.div 
                     initial={{ y: 30, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     viewport={{ once: false }}
                     transition={{ duration: 0.8 }}
-                    className="text-center mb-12"
+                    className="text-center mb-16"
                 >
-                    <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-4 tracking-tight transition-colors">Frequently Asked Questions</h2>
-                    <p className="text-gray-600 dark:text-gray-400 text-lg">Got questions? We've got answers.</p>
+                    <span className="inline-block px-3 py-1 bg-orange-500/10 text-orange-500 dark:text-orange-400 rounded-full text-sm font-semibold border border-orange-500/20 mb-4 shadow-[0_0_15px_rgba(249,115,22,0.1)]">
+                        Everything You Need to Know
+                    </span>
+                    <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6 tracking-tight transition-colors">Frequently Asked Questions</h2>
+                    <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">Got questions? We've got answers. If you can't find what you're looking for, feel free to contact us.</p>
                 </motion.div>
                 <motion.div 
                     initial={{ y: 50, opacity: 0 }}
@@ -502,7 +510,7 @@ const FAQ = () => {
                     viewport={{ once: false }}
                     transition={{ duration: 1, delay: 0.2 }}
                 >
-                    <Accordion items={faqData} className="bg-black/50 backdrop-blur-md border-gray-800" />
+                    <Accordion items={faqData} className="border-none bg-transparent dark:bg-transparent shadow-none" />
                 </motion.div>
             </div>
         </section>

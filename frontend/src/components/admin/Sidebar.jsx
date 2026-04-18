@@ -14,12 +14,15 @@ const Sidebar = () => {
     };
 
     const navItems = [
+        { label: 'Home', isHeader: true },
         { label: 'Dashboard',     path: '/admin/dashboard',     icon: LayoutDashboard },
         { label: 'Courses',       path: '/admin/courses',       icon: BookOpen },
-        { label: 'Events',        path: '/admin/events',        icon: Calendar },
+        { label: 'Services', isHeader: true },
+        { label: 'Internships',   path: '/admin/internships',   icon: Briefcase },
+        { label: 'Workshops',     path: '/admin/events',        icon: Calendar },
+        { label: 'Administration', isHeader: true },
         { label: 'Gallery',       path: '/admin/gallery',       icon: Image },
         { label: 'Registrations', path: '/admin/registrations', icon: ClipboardList },
-        { label: 'Internships',   path: '/admin/internships',   icon: Briefcase },
         { label: 'Team',          path: '/admin/team',          icon: Users },
         { label: 'Enquiries',     path: '/admin/enquiries',     icon: MessageSquare },
     ];
@@ -29,14 +32,14 @@ const Sidebar = () => {
             initial={{ x: -80, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ type: 'spring', stiffness: 260, damping: 28, delay: 0.05 }}
-            className="w-64 bg-white/80 dark:bg-gray-900/50 backdrop-blur-xl h-full border-r border-gray-200 dark:border-white/5 flex flex-col relative z-20 transition-colors duration-500"
+            className="w-64 bg-white/80 dark:bg-gray-900/50 backdrop-blur-xl h-full border-r border-gray-200 dark:border-white/5 flex flex-col relative z-20 transition-colors duration-500 overflow-y-auto"
         >
             {/* Logo */}
             <motion.div
                 initial={{ opacity: 0, y: -12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.4 }}
-                className="h-16 flex items-center px-6 border-b border-gray-200 dark:border-white/5 bg-gray-50/50 dark:bg-black/20"
+                className="h-16 flex-shrink-0 flex items-center px-6 border-b border-gray-200 dark:border-white/5 bg-gray-50/50 dark:bg-black/20 sticky top-0 z-10"
             >
                 <h2 className="text-xl font-extrabold text-gray-900 dark:text-white tracking-wider flex items-center gap-2">
                     Pi Robo{' '}
@@ -51,8 +54,24 @@ const Sidebar = () => {
             </motion.div>
 
             {/* Nav Items */}
-            <nav className="flex-1 py-6 space-y-1 px-4">
+            <nav className="flex-1 py-6 space-y-1.5 px-4 overflow-y-auto">
                 {navItems.map((item, i) => {
+                    if (item.isHeader) {
+                        return (
+                            <motion.div
+                                key={`header-${item.label}`}
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.1 + i * 0.05 }}
+                                className="px-4 pt-4 pb-1"
+                            >
+                                <span className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">
+                                    {item.label}
+                                </span>
+                            </motion.div>
+                        );
+                    }
+
                     const isActive = location.pathname === item.path;
                     return (
                         <motion.div

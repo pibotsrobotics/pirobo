@@ -20,7 +20,39 @@ const Contact = () => {
                 source: 'Contact Form'
             };
 
-            await enquiryService.create(payload);
+            // Save to Firebase first (wrap in try/catch to not block email if Firebase rules fail)
+            try {
+                await enquiryService.create(payload);
+            } catch (fbError) {
+                console.error("Firebase save failed, proceeding with email", fbError);
+            }
+
+            // Send Email Notification via Web3Forms if Key is configured
+            const web3FormsKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+            if (web3FormsKey) {
+                try {
+                    await fetch("https://api.web3forms.com/submit", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Accept: "application/json",
+                        },
+                        body: JSON.stringify({
+                            access_key: web3FormsKey,
+                            subject: "New Contact Form Enquiry - Pi Robo",
+                            from_name: data.name,
+                            email: data.email,
+                            phone: data.phone,
+                            message: data.message,
+                            interest: data.interest
+                        })
+                    });
+                } catch (emailError) {
+                    console.error("Failed to send email notification", emailError);
+                    // We don't block the UI if email fails, as Firebase save succeeded
+                }
+            }
+
             alert('Message Sent Successfully! We will contact you soon.');
             reset();
         } catch (error) {
@@ -31,7 +63,7 @@ const Contact = () => {
 
     const contactInfo = [
         { title: 'Phone', value: '+91 85472 44223', icon: Phone, color: 'text-orange-500 bg-orange-500/10' },
-        { title: 'Email', value: 'hello@pirobo.com', icon: Mail, color: 'text-green-400 bg-green-500/10' },
+        { title: 'Email', value: 'pibotsacademy@gmail.com', icon: Mail, color: 'text-green-400 bg-green-500/10' },
         { title: 'Location', value: 'Pibots Makerhub, Mampad, Kerala 676542', icon: MapPin, color: 'text-red-400 bg-red-500/10' },
     ];
 
