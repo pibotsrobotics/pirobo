@@ -34,13 +34,13 @@ class BaseService {
     async getAll() {
         if (!this._isFirebaseConfigured()) {
             const all = this._localGet();
-            return all.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+            return all.sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
         }
         try {
             const snapshot = await getDocs(collection(db, this.collectionName));
             let data = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
-            // Sort by createdAt descending (newest added shows up first)
-            data.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+            // Sort by createdAt ascending (oldest added shows up first)
+            data.sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
             return data;
         } catch (error) {
             console.warn(`[${this.collectionName}] Firestore read failed:`, error.code, error.message);
