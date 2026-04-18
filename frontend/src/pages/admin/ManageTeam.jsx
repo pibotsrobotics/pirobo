@@ -202,7 +202,7 @@ const ManageTeam = () => {
         try {
             let imageUrl = isEditMode ? (editingMember?.image || null) : null;
 
-            if (formData.image instanceof File) {
+            if (formData.image && typeof formData.image !== 'string') {
                 try {
                     imageUrl = await uploadService.uploadFile(formData.image, 'team');
                 } catch {
