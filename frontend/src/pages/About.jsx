@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Card from '../components/ui/Card';
+import SEO from '../components/ui/SEO';
 import { Target, Lightbulb, Users, Award, Zap, User } from 'lucide-react';
 import { teamService } from '../services';
 
@@ -58,6 +59,7 @@ const About = () => {
 
     return (
         <div className="bg-gray-50 dark:bg-black transition-colors duration-500 min-h-screen relative overflow-hidden">
+            <SEO title="About Us" description="Learn about the passionate team behind Pi Robo and our mission to democratize robotics education." />
             {/* Ambient Multi-color Glows */}
             <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-orange-600/10 rounded-full blur-[120px] pointer-events-none"></div>
             <div className="absolute top-[40%] left-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none"></div>

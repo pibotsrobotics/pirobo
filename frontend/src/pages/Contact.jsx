@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
 import Input from '../components/ui/Input';
+import SEO from '../components/ui/SEO';
 import { Phone, Mail, MapPin, Instagram, Linkedin, Send } from 'lucide-react';
 import { enquiryService } from '../services';
 
@@ -69,6 +70,7 @@ const Contact = () => {
 
     return (
         <div className="bg-gray-50 dark:bg-black transition-colors duration-500 min-h-screen py-12 relative overflow-hidden">
+            <SEO title="Contact Us" description="Get in touch with Pi Robo. We're here to answer any questions about our robotics courses, workshops, or partnerships." />
             {/* Ambient Background Glow */}
             <div className="absolute top-20 right-1/4 w-[400px] h-[400px] bg-orange-600/10 rounded-full blur-[100px] pointer-events-none"></div>
             <div className="absolute bottom-20 left-1/4 w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none"></div>

@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
 import Accordion from '../components/ui/Accordion';
+import SEO from '../components/ui/SEO';
 import { Bot, Code, Cpu, ArrowRight, Users, Award, Calendar, ExternalLink, MapPin, Briefcase } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { eventService, registrationService } from '../services';
@@ -555,6 +556,7 @@ const CTA = () => {
 const Home = () => {
     return (
         <>
+            <SEO title="Home" />
             <Hero />
             <Stats />
             <Programs />
