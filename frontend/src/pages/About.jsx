@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Card from '../components/ui/Card';
 import { Target, Lightbulb, Users, Award, Zap, User } from 'lucide-react';
@@ -31,17 +31,7 @@ const About = () => {
         const fetchTeam = async () => {
             try {
                 const data = await teamService.getAll();
-                // Fallback to defaults if empty and no data has ever been saved
-                if (data.length === 0) {
-                    setTeam([
-                        { name: 'Dr. Arun Kumar', role: 'Founder & CEO', image: null },
-                        { name: 'Sarah Lee', role: 'Head of Robotics', image: null },
-                        { name: 'Rahul Singh', role: 'AI Curriculum Lead', image: null },
-                        { name: 'Priya Patel', role: 'Operations Manager', image: null },
-                    ]);
-                } else {
-                    setTeam(data);
-                }
+                setTeam(data);
             } catch (error) {
                 console.error("Failed to fetch team", error);
             }

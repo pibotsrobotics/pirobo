@@ -28,7 +28,7 @@ const Footer = () => {
                                     <div className="w-8 h-8 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500 border border-orange-500/20">
                                         <Mail size={16} />
                                     </div>
-                                    <span className="text-gray-300 hover:text-orange-400 transition-colors cursor-pointer">hello@pirobo.com</span>
+                                    <span className="text-gray-300 hover:text-orange-400 transition-colors cursor-pointer">pibotsacademy@gmail.com</span>
                                 </li>
                                 <li className="flex items-start gap-3">
                                     <div className="w-8 h-8 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500 border border-orange-500/20 mt-1">
