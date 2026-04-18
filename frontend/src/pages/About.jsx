@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Card from '../components/ui/Card';
 import SEO from '../components/ui/SEO';
@@ -23,6 +23,142 @@ const safeUrl = (url) => {
     if (!url) return '#';
     return url.startsWith('http://') || url.startsWith('https://') ? url : `https://${url}`;
 };
+
+// ─── Arrow Connector ─────────────────────────────────────────────────────────
+// Draws animated curved arrows from the left anchor to each team-member card.
+// Uses real pixel heights so arrows always land at the correct card centers.
+const CARD_H = 104;        // approximate card height px (p-5 row card)
+const CARD_GAP = 24;       // gap-6 = 24px
+const CARD_PADDING_V = 0;  // extra padding inside card before centre
+
+const ArrowConnector = ({ count }) => {
+    const svgRef = useRef(null);
+    const [height, setHeight] = useState(500);
+
+    // Recompute height whenever the column changes
+    useEffect(() => {
+        const recalc = () => {
+            // total height = n * cardH + (n-1) * gap
+            const h = count * CARD_H + Math.max(0, count - 1) * CARD_GAP;
+            setHeight(Math.max(h, 80));
+        };
+        recalc();
+    }, [count]);
+
+    if (count === 0) return null;
+
+    const W = 180; // SVG pixel width
+    const H = height;
+
+    // X positions (in px within SVG)
+    const startX = 8;
+    const endX = W - 12;
+
+    // Y of the origin (centre of founder card, mapped to middle of SVG)
+    const originY = H / 2;
+
+    return (
+        <div className="hidden lg:flex items-center flex-1 min-w-[140px] max-w-[220px] self-stretch relative z-0">
+            <svg
+                ref={svgRef}
+                width={W}
+                height={H}
+                viewBox={`0 0 ${W} ${H}`}
+                className="w-full h-full overflow-visible"
+                style={{ filter: 'drop-shadow(0 0 8px rgba(249,115,22,0.55))' }}
+            >
+                <defs>
+                    {/* Gradient stroke */}
+                    <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#f97316" stopOpacity="0.6" />
+                        <stop offset="100%" stopColor="#fb923c" stopOpacity="1" />
+                    </linearGradient>
+
+                    {/* Arrowhead marker */}
+                    <marker
+                        id="ah"
+                        markerWidth="8" markerHeight="8"
+                        refX="7" refY="4"
+                        orient="auto"
+                        markerUnits="userSpaceOnUse"
+                    >
+                        <polygon points="0 1, 8 4, 0 7" fill="#fb923c" />
+                    </marker>
+
+                    {/* Glow filter */}
+                    <filter id="glow2" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur stdDeviation="2.5" result="blur" />
+                        <feMerge>
+                            <feMergeNode in="blur" />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
+                </defs>
+
+                {Array.from({ length: count }).map((_, i) => {
+                    // Center Y of each card in the right column
+                    const cardCenterY = i * (CARD_H + CARD_GAP) + CARD_H / 2;
+
+                    const cx1 = startX + (endX - startX) * 0.45;
+                    const cx2 = startX + (endX - startX) * 0.55;
+
+                    const d = `M ${startX},${originY} C ${cx1},${originY} ${cx2},${cardCenterY} ${endX},${cardCenterY}`;
+
+                    const dashLen = 1200; // large enough for any curve length
+                    const delay = `${i * 0.35}s`;
+
+                    return (
+                        <g key={i} filter="url(#glow2)">
+                            {/* Faint background stroke */}
+                            <path
+                                d={d}
+                                stroke="#f97316"
+                                strokeOpacity="0.18"
+                                strokeWidth="2"
+                                fill="none"
+                            />
+                            {/* Animated main stroke */}
+                            <path
+                                d={d}
+                                stroke="url(#arrowGrad)"
+                                strokeWidth="2"
+                                fill="none"
+                                markerEnd="url(#ah)"
+                                strokeDasharray={`${dashLen} ${dashLen}`}
+                                strokeDashoffset={dashLen}
+                                style={{
+                                    animation: `arrowDraw 0.9s cubic-bezier(0.4,0,0.2,1) ${delay} forwards`,
+                                }}
+                            />
+                            {/* Glowing endpoint dot */}
+                            <circle
+                                cx={endX - 2}
+                                cy={cardCenterY}
+                                r="4"
+                                fill="#fb923c"
+                                opacity="0"
+                                style={{
+                                    animation: `dotFade 0.4s ease ${delay} forwards`,
+                                    animationDelay: `calc(${delay} + 0.7s)`,
+                                }}
+                            />
+                        </g>
+                    );
+                })}
+
+                <style>{`
+                    @keyframes arrowDraw {
+                        to { stroke-dashoffset: 0; }
+                    }
+                    @keyframes dotFade {
+                        to { opacity: 1; }
+                    }
+                `}</style>
+            </svg>
+        </div>
+    );
+};
+// ─────────────────────────────────────────────────────────────────────────────
 
 const About = () => {
     const [team, setTeam] = useState([]);
@@ -244,45 +380,7 @@ const About = () => {
                                 </div>
 
                                 {/* Curved Arrows Connector (Desktop only) */}
-                                <div className="hidden lg:block flex-1 min-w-[120px] max-w-[200px] h-[500px] relative z-0 opacity-80">
-                                    <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-full absolute inset-0 text-orange-500 drop-shadow-[0_0_10px_rgba(249,115,22,0.7)]">
-                                        <defs>
-                                            <marker id="arrowhead" markerWidth="6" markerHeight="6" refX="4" refY="3" orient="auto">
-                                                <polygon points="0 0, 6 3, 0 6" fill="#f97316" />
-                                            </marker>
-                                            <filter id="glow">
-                                                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                                                <feMerge>
-                                                    <feMergeNode in="coloredBlur"/>
-                                                    <feMergeNode in="SourceGraphic"/>
-                                                </feMerge>
-                                            </filter>
-                                        </defs>
-
-                                        {others.map((_, i) => {
-                                            const total = others.length;
-                                            // Distribute end points (Y coordinate) from 15 to 85 depending on how many items
-                                            let yPos = 50; 
-                                            if (total > 1) {
-                                                const spacing = 70 / (total - 1);
-                                                yPos = 15 + (spacing * i);
-                                            }
-                                            return (
-                                                <path 
-                                                    key={i}
-                                                    d={`M0,50 C 45,50 55,${yPos} 92,${yPos}`} 
-                                                    stroke="currentColor" 
-                                                    strokeWidth="2" 
-                                                    vectorEffect="non-scaling-stroke" 
-                                                    fill="none" 
-                                                    markerEnd="url(#arrowhead)" 
-                                                    filter="url(#glow)"
-                                                    style={{ animation: `pulse ${2 + i*0.5}s infinite alternate` }}
-                                                />
-                                            );
-                                        })}
-                                    </svg>
-                                </div>
+                                <ArrowConnector count={others.length} />
 
                                 {/* Second Column: Other Team Members */}
                                 <div className="w-full lg:w-[45%] flex flex-col gap-6 z-10">
