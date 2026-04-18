@@ -1,38 +1,25 @@
 import { db } from '../config/firebase';
-import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, getDoc } from 'firebase/firestore';
 
 /**
- * Generic class to handle dual-mode data persistence (Firestore + LocalStorage fallback)
+ * Generic class to handle data persistence.
+ * Prioritizes Firestore. Falls back to LocalStorage ONLY for reads when
+ * Firestore is completely unavailable (no Firebase config at all).
+ * Writes ALWAYS go to Firestore when Firebase is configured.
  */
 class BaseService {
     constructor(collectionName) {
         this.collectionName = collectionName;
-        this._firestoreReady = null; // detected on first use
+        this._firestoreReady = null;
     }
 
-    async _isFirestoreAvailable() {
-        if (this._firestoreReady !== null) return this._firestoreReady;
-        try {
-            // Our mock in firebase.js uses {} which will fail this check
-            if (!db || Object.keys(db).length === 0) { 
-                this._firestoreReady = false; 
-                return false; 
-            }
-            await getDocs(collection(db, '__ping__'));
-            this._firestoreReady = true;
-        } catch (e) {
-            const code = e?.code || '';
-            // Permission / auth errors → Firestore IS reachable
-            // unavailable / failed-precondition → no Firebase configured
-            this._firestoreReady = !['unavailable', 'failed-precondition'].includes(code);
-            if (!this._firestoreReady) {
-                console.info(`[${this.collectionName}] Firestore unavailable – using LocalStorage.`);
-            }
-        }
-        return this._firestoreReady;
+    _isFirebaseConfigured() {
+        // db is a real Firestore instance if Firebase was initialized,
+        // or an empty object {} if mock mode (no env vars)
+        return db && typeof db.type === 'string'; // Firestore instances have a `type` property
     }
 
-    // --- LocalStorage helpers ---
+    // --- LocalStorage helpers (fallback only) ---
     _localGet() {
         try {
             return JSON.parse(localStorage.getItem(this.collectionName) || '[]');
@@ -45,65 +32,59 @@ class BaseService {
 
     // --- READ ALL ---
     async getAll() {
-        if (await this._isFirestoreAvailable()) {
-            try {
-                const snapshot = await getDocs(collection(db, this.collectionName));
-                return snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
-            } catch (error) {
-                console.warn(`[${this.collectionName}] Firestore read failed, falling back.`, error.message);
-            }
+        if (!this._isFirebaseConfigured()) {
+            return this._localGet();
         }
-        return this._localGet();
+        try {
+            const snapshot = await getDocs(collection(db, this.collectionName));
+            const data = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+            return data;
+        } catch (error) {
+            console.warn(`[${this.collectionName}] Firestore read failed:`, error.code, error.message);
+            // Only fall back to localStorage if Firestore itself is unreachable
+            if (error.code === 'unavailable' || error.code === 'failed-precondition') {
+                return this._localGet();
+            }
+            // Permission denied means rules block it - return empty so we don't show stale mock data
+            return [];
+        }
     }
 
     // --- CREATE ---
     async create(data) {
-        if (await this._isFirestoreAvailable()) {
-            try {
-                const docRef = await addDoc(collection(db, this.collectionName), data);
-                return { id: docRef.id, ...data };
-            } catch (error) {
-                console.warn(`[${this.collectionName}] Firestore create failed, falling back.`, error.message);
-            }
+        if (!this._isFirebaseConfigured()) {
+            const all = this._localGet();
+            const newItem = { id: `local_${Date.now()}`, ...data };
+            this._localSet([...all, newItem]);
+            return newItem;
         }
-        const all = this._localGet();
-        const newItem = { id: `local_${Date.now()}`, ...data };
-        this._localSet([...all, newItem]);
-        return newItem;
+        const docRef = await addDoc(collection(db, this.collectionName), data);
+        return { id: docRef.id, ...data };
     }
 
     // --- UPDATE ---
     async update(id, data) {
-        if (await this._isFirestoreAvailable()) {
-            try {
-                const itemRef = doc(db, this.collectionName, id);
-                await updateDoc(itemRef, data);
-                return { id, ...data };
-            } catch (error) {
-                console.warn(`[${this.collectionName}] Firestore update failed, falling back.`, error.message);
-            }
+        if (!this._isFirebaseConfigured()) {
+            const all = this._localGet();
+            const exists = all.some(item => item.id === id);
+            const updated = exists
+                ? all.map(item => item.id === id ? { ...item, ...data } : item)
+                : [...all, { id, ...data }];
+            this._localSet(updated);
+            return { id, ...data };
         }
-        // LocalStorage fallback — upsert by ID (handles Firestore-seeded IDs too)
-        const all = this._localGet();
-        const exists = all.some(item => item.id === id);
-        const updated = exists
-            ? all.map(item => item.id === id ? { ...item, ...data } : item)
-            : [...all, { id, ...data }];
-        this._localSet(updated);
+        const itemRef = doc(db, this.collectionName, id);
+        await updateDoc(itemRef, data);
         return { id, ...data };
     }
 
     // --- DELETE ---
     async delete(id) {
-        if (await this._isFirestoreAvailable()) {
-            try {
-                await deleteDoc(doc(db, this.collectionName, id));
-                return true;
-            } catch (error) {
-                console.warn(`[${this.collectionName}] Firestore delete failed, falling back.`, error.message);
-            }
+        if (!this._isFirebaseConfigured()) {
+            this._localSet(this._localGet().filter(item => item.id !== id));
+            return true;
         }
-        this._localSet(this._localGet().filter(item => item.id !== id));
+        await deleteDoc(doc(db, this.collectionName, id));
         return true;
     }
 }
