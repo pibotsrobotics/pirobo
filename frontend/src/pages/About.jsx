@@ -199,6 +199,33 @@ const About = () => {
                                         </div>
                                         <h3 className="text-3xl font-extrabold text-gray-900 dark:text-white transition-colors mb-2 uppercase tracking-tight relative z-10">{founder.name}</h3>
                                         <p className="text-orange-500 font-bold text-lg tracking-wide relative z-10">{founder.role}</p>
+                                        {/* Always-visible social icons */}
+                                        <div className="flex items-center gap-3 mt-3 relative z-10">
+                                            {founder.instagram && (
+                                                <a href={safeUrl(founder.instagram)} target="_blank" rel="noopener noreferrer"
+                                                    className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-pink-400 hover:bg-pink-500 hover:text-white transition-all duration-200 hover:scale-110"
+                                                    title="Instagram"
+                                                >
+                                                    <InstagramIcon size={15} />
+                                                </a>
+                                            )}
+                                            {founder.linkedin && (
+                                                <a href={safeUrl(founder.linkedin)} target="_blank" rel="noopener noreferrer"
+                                                    className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-blue-400 hover:bg-blue-600 hover:text-white transition-all duration-200 hover:scale-110"
+                                                    title="LinkedIn"
+                                                >
+                                                    <LinkedInIcon size={15} />
+                                                </a>
+                                            )}
+                                            {founder.website && (
+                                                <a href={safeUrl(founder.website)} target="_blank" rel="noopener noreferrer"
+                                                    className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-orange-400 hover:bg-orange-500 hover:text-white transition-all duration-200 hover:scale-110"
+                                                    title="Website"
+                                                >
+                                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                                                </a>
+                                            )}
+                                        </div>
                                     </motion.div>
 
                                     {/* Desktop Anchor Point */}
@@ -296,6 +323,35 @@ const About = () => {
                                             <div className="flex-1">
                                                 <h3 className="text-xl font-bold text-gray-900 dark:text-white transition-colors group-hover:text-orange-400 transition-colors uppercase tracking-tight">{member.name}</h3>
                                                 <p className="text-orange-500/90 text-sm font-semibold tracking-wide mt-1">{member.role}</p>
+                                                {/* Always-visible social icons */}
+                                                {(member.instagram || member.linkedin || member.website) && (
+                                                    <div className="flex items-center gap-2 mt-2">
+                                                        {member.instagram && (
+                                                            <a href={safeUrl(member.instagram)} target="_blank" rel="noopener noreferrer"
+                                                                className="w-7 h-7 rounded-full bg-white/10 dark:bg-white/5 flex items-center justify-center text-pink-400 hover:bg-pink-500 hover:text-white transition-all duration-200 hover:scale-110"
+                                                                title="Instagram" onClick={(e) => e.stopPropagation()}
+                                                            >
+                                                                <InstagramIcon size={13} />
+                                                            </a>
+                                                        )}
+                                                        {member.linkedin && (
+                                                            <a href={safeUrl(member.linkedin)} target="_blank" rel="noopener noreferrer"
+                                                                className="w-7 h-7 rounded-full bg-white/10 dark:bg-white/5 flex items-center justify-center text-blue-400 hover:bg-blue-600 hover:text-white transition-all duration-200 hover:scale-110"
+                                                                title="LinkedIn" onClick={(e) => e.stopPropagation()}
+                                                            >
+                                                                <LinkedInIcon size={13} />
+                                                            </a>
+                                                        )}
+                                                        {member.website && (
+                                                            <a href={safeUrl(member.website)} target="_blank" rel="noopener noreferrer"
+                                                                className="w-7 h-7 rounded-full bg-white/10 dark:bg-white/5 flex items-center justify-center text-orange-400 hover:bg-orange-500 hover:text-white transition-all duration-200 hover:scale-110"
+                                                                title="Website" onClick={(e) => e.stopPropagation()}
+                                                            >
+                                                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                                                            </a>
+                                                        )}
+                                                    </div>
+                                                )}
                                             </div>
                                         </motion.div>
                                     ))}
