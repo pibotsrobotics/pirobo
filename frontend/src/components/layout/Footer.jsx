@@ -46,7 +46,7 @@ const Footer = () => {
                         <div>
                             <h3 className="text-lg font-bold text-white mb-4">Connect With Us</h3>
                             <div className="flex gap-4">
-                                <a href="#" className="w-10 h-10 rounded-full bg-gray-900 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-orange-600 hover:text-white hover:border-orange-500 hover:shadow-[0_0_15px_rgba(249,115,22,0.4)] transition-all duration-300 transform hover:-translate-y-1">
+                                <a href="https://www.instagram.com/pirobo.learning" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-900 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-orange-600 hover:text-white hover:border-orange-500 hover:shadow-[0_0_15px_rgba(249,115,22,0.4)] transition-all duration-300 transform hover:-translate-y-1">
                                     <Instagram size={18} />
                                 </a>
                                 <a href="#" className="w-10 h-10 rounded-full bg-gray-900 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-blue-600 hover:text-white hover:border-blue-500 hover:shadow-[0_0_15px_rgba(37,99,235,0.4)] transition-all duration-300 transform hover:-translate-y-1">
