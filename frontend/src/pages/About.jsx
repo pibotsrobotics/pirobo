@@ -191,6 +191,14 @@ const About = () => {
                                                         <LinkedInIcon size={24} />
                                                     </a>
                                                 )}
+                                                {founder.website && (
+                                                    <a href={founder.website} target="_blank" rel="noopener noreferrer"
+                                                        className="text-white hover:text-orange-400 transition-colors transform hover:scale-125 duration-200"
+                                                        onClick={(e) => e.stopPropagation()}
+                                                    >
+                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                                                    </a>
+                                                )}
                                             </div>
                                         </div>
                                         <h3 className="text-3xl font-extrabold text-gray-900 dark:text-white transition-colors mb-2 uppercase tracking-tight relative z-10">{founder.name}</h3>
@@ -277,6 +285,14 @@ const About = () => {
                                                             onClick={(e) => e.stopPropagation()}
                                                         >
                                                             <LinkedInIcon size={16} />
+                                                        </a>
+                                                    )}
+                                                    {member.website && (
+                                                        <a href={member.website} target="_blank" rel="noopener noreferrer"
+                                                            className="text-white hover:text-orange-400 transition-colors transform hover:scale-125 duration-200"
+                                                            onClick={(e) => e.stopPropagation()}
+                                                        >
+                                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                                                         </a>
                                                     )}
                                                 </div>

@@ -41,7 +41,7 @@ async function getCroppedImg(imageSrc, pixelCrop) {
     });
 }
 
-const defaultForm = { name: '', role: '', image: null, instagram: '', linkedin: '' };
+const defaultForm = { name: '', role: '', image: null, instagram: '', linkedin: '', website: '' };
 
 // Animation variants
 const containerVariants = {
@@ -129,7 +129,7 @@ const ManageTeam = () => {
     const openEditModal = (member) => {
         setIsEditMode(true);
         setEditingMember(member);
-        setFormData({ name: member.name || '', role: member.role || '', image: null, instagram: member.instagram || '', linkedin: member.linkedin || '' });
+        setFormData({ name: member.name || '', role: member.role || '', image: null, instagram: member.instagram || '', linkedin: member.linkedin || '', website: member.website || '' });
         setPreviewUrl(member.image || null);
         setFormError('');
         setIsCropping(false);
@@ -210,7 +210,7 @@ const ManageTeam = () => {
                 }
             }
 
-            const memberData = { name: formData.name.trim(), role: formData.role.trim(), image: imageUrl, instagram: formData.instagram?.trim() || '', linkedin: formData.linkedin?.trim() || '' };
+            const memberData = { name: formData.name.trim(), role: formData.role.trim(), image: imageUrl, instagram: formData.instagram?.trim() || '', linkedin: formData.linkedin?.trim() || '', website: formData.website?.trim() || '' };
 
             if (isEditMode) {
                 await teamService.update(editingMember.id, memberData);
@@ -595,6 +595,24 @@ const ManageTeam = () => {
                                             onChange={handleInputChange}
                                             placeholder="https://linkedin.com/in/username"
                                             className="w-full pl-9 bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500/60 transition-colors placeholder-gray-400 text-sm font-medium"
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Website */}
+                                <div>
+                                    <label className="block text-xs font-bold text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-widest">Website URL <span className="text-gray-400 font-normal normal-case">(optional)</span></label>
+                                    <div className="relative">
+                                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-orange-500">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                                        </span>
+                                        <input
+                                            type="url"
+                                            name="website"
+                                            value={formData.website}
+                                            onChange={handleInputChange}
+                                            placeholder="https://yourwebsite.com"
+                                            className="w-full pl-9 bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white rounded-xl px-4 py-3 focus:outline-none focus:border-orange-500/60 transition-colors placeholder-gray-400 text-sm font-medium"
                                         />
                                     </div>
                                 </div>
