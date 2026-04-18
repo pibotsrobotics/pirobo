@@ -7,6 +7,7 @@ import Button from '../../components/ui/Button';
 import Input from '../../components/ui/Input';
 import Modal from '../../components/ui/Modal';
 import Toast from '../../components/ui/Toast';
+import ImageCropper from '../../components/ui/ImageCropper';
 import { eventService } from '../../services';
 
 const ManageEvents = () => {
@@ -19,6 +20,7 @@ const ManageEvents = () => {
     const [showToast, setShowToast] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
     const [previewImage, setPreviewImage] = useState('');
+    const [cropSrc, setCropSrc] = useState(null);
 
     const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm();
 
@@ -174,19 +176,17 @@ const ManageEvents = () => {
                                             const file = e.target.files[0];
                                             if (file) {
                                                 const reader = new FileReader();
-                                                reader.onloadend = () => {
-                                                    setPreviewImage(reader.result);
-                                                    setValue('image', reader.result);
-                                                };
+                                                reader.onloadend = () => setCropSrc(reader.result);
                                                 reader.readAsDataURL(file);
                                             }
+                                            e.target.value = '';
                                         }}
                                     />
                                     <label
                                         htmlFor="event-image-upload"
                                         className="inline-flex items-center px-4 py-2 bg-gray-100 dark:bg-gray-800/80 border border-gray-200 dark:border-white/5 rounded-xl text-sm font-bold text-gray-700 dark:text-gray-300 hover:bg-orange-500 hover:text-white cursor-pointer transition-all shadow-sm"
                                     >
-                                        Or Upload File
+                                        Or Upload & Crop
                                     </label>
                                 </div>
                             </div>
@@ -251,6 +251,20 @@ const ManageEvents = () => {
                 isVisible={showToast}
                 onClose={() => setShowToast(false)}
             />
+
+            {/* Image Crop Overlay */}
+            {cropSrc && (
+                <ImageCropper
+                    imageSrc={cropSrc}
+                    aspect={16 / 9}
+                    onCrop={(croppedDataUrl) => {
+                        setPreviewImage(croppedDataUrl);
+                        setValue('image', croppedDataUrl);
+                        setCropSrc(null);
+                    }}
+                    onCancel={() => setCropSrc(null)}
+                />
+            )}
         </div>
     );
 };
