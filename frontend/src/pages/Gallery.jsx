@@ -10,37 +10,10 @@ import workshop2 from '../assets/gallery/nilgiri-workshop/workshop_2.jpg';
 import workshop3 from '../assets/gallery/nilgiri-workshop/workshop_3.jpg';
 import workshop4 from '../assets/gallery/nilgiri-workshop/workshop_4.jpg';
 
-const initialImages = [
-    { id: "g1", src: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop', category: 'Robotics', alt: 'Robot Building' },
-    { id: "g2", src: 'https://images.unsplash.com/photo-1555255707-c07a664d6a97?q=80&w=2070&auto=format&fit=crop', category: 'AI', alt: 'Data Analysis' },
-    { id: "g3", src: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=2070&auto=format&fit=crop', category: 'Workshops', alt: 'Coding Workshop' },
-    { id: "g4", src: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=1974&auto=format&fit=crop', category: 'Events', alt: 'Tech Event' },
-    { id: "n1", src: workshop1, category: 'Workshops', alt: 'Nilgiri Arts And Science College Workshop' },
-    { id: "n2", src: workshop2, category: 'Workshops', alt: 'Nilgiri Arts And Science College Workshop' },
-    { id: "n3", src: workshop3, category: 'Workshops', alt: 'Nilgiri Arts And Science College Workshop' },
-    { id: "n4", src: workshop4, category: 'Workshops', alt: 'Nilgiri Arts And Science College Workshop' },
-];
-
-const Gallery = () => {
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [images, setImages] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [filter, setFilter] = useState('All');
-
-    useEffect(() => {
-        loadImages();
-    }, []);
-
     const loadImages = async () => {
         setLoading(true);
         try {
-            let data = await galleryService.getAll();
-            if (data.length === 0) {
-                if (!localStorage.getItem('gallery')) {
-                    for (const img of initialImages) await galleryService.create(img);
-                    data = await galleryService.getAll();
-                }
-            }
+            const data = await galleryService.getAll();
             setImages(data);
         } catch (error) {
             console.error("Failed loading gallery", error);
