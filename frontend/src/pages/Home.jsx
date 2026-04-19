@@ -87,7 +87,7 @@ const Hero = () => {
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: false }}
+                        viewport={{ once: true }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
                         className="flex items-center gap-3 rounded-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-white/10 px-5 py-2 text-sm font-bold text-gray-800 dark:text-gray-200 mb-8 backdrop-blur-md shadow-sm dark:shadow-none transition-colors"
                     >
@@ -155,7 +155,7 @@ const Stats = () => {
                 <motion.div 
                     initial="hidden"
                     whileInView="show"
-                    viewport={{ once: false, amount: 0.3 }}
+                    viewport={{ once: true, amount: 0.3 }}
                     variants={{
                         hidden: { opacity: 0 },
                         show: {
@@ -204,8 +204,8 @@ const Programs = () => {
                 <motion.div 
                     initial={{ y: 30, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: false }}
-                    transition={{ duration: 0.8, ease: "power3.out" }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
                     className="text-center max-w-3xl mx-auto mb-16"
                 >
                     <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-4 tracking-tight transition-colors">Our Core Programs</h2>
@@ -215,7 +215,7 @@ const Programs = () => {
                 <motion.div 
                     initial="hidden"
                     whileInView="show"
-                    viewport={{ once: false, amount: 0.2 }}
+                    viewport={{ once: true, amount: 0.2 }}
                     variants={{
                         hidden: { opacity: 0 },
                         show: {
@@ -232,7 +232,7 @@ const Programs = () => {
                             key={index} 
                             variants={{
                                 hidden: { y: 100, opacity: 0 },
-                                show: { y: 0, opacity: 1, transition: { duration: 1, ease: "power4.out" } }
+                                show: { y: 0, opacity: 1, transition: { duration: 1, ease: "easeOut" } }
                             }}
                             className="h-full"
                         >
@@ -269,7 +269,7 @@ const InternshipBanner = () => {
                     <motion.div 
                         initial={{ x: -50, opacity: 0 }}
                         whileInView={{ x: 0, opacity: 1 }}
-                        viewport={{ once: false }}
+                        viewport={{ once: true }}
                         transition={{ duration: 1, ease: "easeOut" }}
                         className="flex-1 space-y-6"
                     >
@@ -294,7 +294,7 @@ const InternshipBanner = () => {
                     <motion.div 
                         initial={{ x: 50, opacity: 0 }}
                         whileInView={{ x: 0, opacity: 1 }}
-                        viewport={{ once: false }}
+                        viewport={{ once: true }}
                         transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
                         className="flex-1 flex justify-center"
                     >
@@ -374,7 +374,7 @@ const UpcomingEvents = () => {
                 <motion.div 
                     initial={{ y: 30, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: false }}
+                    viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
                     className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4"
                 >
@@ -395,7 +395,7 @@ const UpcomingEvents = () => {
                     <motion.div 
                         initial="hidden"
                         whileInView="show"
-                        viewport={{ once: false, amount: 0.2 }}
+                        viewport={{ once: true, amount: 0.2 }}
                         variants={{
                             hidden: { opacity: 0 },
                             show: {
@@ -495,7 +495,7 @@ const FAQ = () => {
                 <motion.div 
                     initial={{ y: 30, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: false }}
+                    viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
                     className="text-center mb-16"
                 >
@@ -508,7 +508,7 @@ const FAQ = () => {
                 <motion.div 
                     initial={{ y: 50, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: false }}
+                    viewport={{ once: true }}
                     transition={{ duration: 1, delay: 0.2 }}
                 >
                     <Accordion items={faqData} className="border-none bg-transparent dark:bg-transparent shadow-none" />
@@ -528,7 +528,7 @@ const CTA = () => {
             <motion.div 
                 initial={{ scale: 0.9, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
-                viewport={{ once: false }}
+                viewport={{ once: true }}
                 transition={{ duration: 1, ease: "backOut" }}
                 className="container mx-auto px-4 md:px-6 text-center relative z-10"
             >

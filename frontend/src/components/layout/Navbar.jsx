@@ -19,7 +19,7 @@ const Navbar = () => {
             subLinks: [
                 { name: 'Internship', path: '/internship' },
                 { name: 'Workshops', path: '/workshops' },
-                { name: '3D Printing', path: '#YOUR_LINK_HERE', external: true }
+                { name: '3D Printing', path: '#', external: true }
             ]
         },
         { name: 'Gallery', path: '/gallery' },

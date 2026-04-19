@@ -27,8 +27,8 @@ const safeUrl = (url) => {
 // ─── Arrow Connector ─────────────────────────────────────────────────────────
 // Draws animated curved arrows from the left anchor to each team-member card.
 // Uses real pixel heights so arrows always land at the correct card centers.
-const CARD_H = 104;        // approximate card height px (p-5 row card)
-const CARD_GAP = 24;       // gap-6 = 24px
+const CARD_H = 160;        
+const CARD_GAP = 32;       // gap-8 = 32px for more professional spacing
 const CARD_PADDING_V = 0;  // extra padding inside card before centre
 
 const ArrowConnector = ({ count }) => {
@@ -38,7 +38,6 @@ const ArrowConnector = ({ count }) => {
     // Recompute height whenever the column changes
     useEffect(() => {
         const recalc = () => {
-            // total height = n * cardH + (n-1) * gap
             const h = count * CARD_H + Math.max(0, count - 1) * CARD_GAP;
             setHeight(Math.max(h, 80));
         };
@@ -47,34 +46,28 @@ const ArrowConnector = ({ count }) => {
 
     if (count === 0) return null;
 
-    const W = 180; // SVG pixel width
+    const W = 120; // Reduced width Brings arrows closer to Founder
     const H = height;
 
-    // X positions (in px within SVG)
-    const startX = 8;
+    const startX = 0; // Starts exactly at the edge
     const endX = W - 12;
-
-    // Y of the origin (centre of founder card, mapped to middle of SVG)
-    const originY = H / 2;
+    const originY = H / 2; // Exact vertical center of the Founder & CEO card
 
     return (
-        <div className="hidden lg:flex items-center flex-1 min-w-[140px] max-w-[220px] self-stretch relative z-0">
+        <div className="hidden lg:block w-[120px] shrink-0 self-stretch relative z-0 ml-4">
             <svg
                 ref={svgRef}
                 width={W}
                 height={H}
                 viewBox={`0 0 ${W} ${H}`}
                 className="w-full h-full overflow-visible"
-                style={{ filter: 'drop-shadow(0 0 8px rgba(249,115,22,0.55))' }}
             >
                 <defs>
-                    {/* Gradient stroke */}
                     <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                         <stop offset="0%" stopColor="#f97316" stopOpacity="0.6" />
                         <stop offset="100%" stopColor="#fb923c" stopOpacity="1" />
                     </linearGradient>
 
-                    {/* Arrowhead marker */}
                     <marker
                         id="ah"
                         markerWidth="8" markerHeight="8"
@@ -85,7 +78,6 @@ const ArrowConnector = ({ count }) => {
                         <polygon points="0 1, 8 4, 0 7" fill="#fb923c" />
                     </marker>
 
-                    {/* Glow filter */}
                     <filter id="glow2" x="-20%" y="-20%" width="140%" height="140%">
                         <feGaussianBlur stdDeviation="2.5" result="blur" />
                         <feMerge>
@@ -96,62 +88,71 @@ const ArrowConnector = ({ count }) => {
                 </defs>
 
                 {Array.from({ length: count }).map((_, i) => {
-                    // Center Y of each card in the right column
-                    const cardCenterY = i * (CARD_H + CARD_GAP) + CARD_H / 2;
-
-                    const cx1 = startX + (endX - startX) * 0.45;
-                    const cx2 = startX + (endX - startX) * 0.55;
-
+                    const rawCenterY = i * (CARD_H + CARD_GAP) + CARD_H / 2;
+                    // Tiny 0.5px jitter prevents a perfectly-flat bezier (which some browsers
+                    // compute as pathLength=0, making the stroke invisible — aka the Ajayraj bug)
+                    const cardCenterY = Math.abs(rawCenterY - originY) < 1 ? rawCenterY + 0.5 : rawCenterY;
+                    const cx1 = startX + (endX - startX) * 0.4;
+                    const cx2 = startX + (endX - startX) * 0.6;
                     const d = `M ${startX},${originY} C ${cx1},${originY} ${cx2},${cardCenterY} ${endX},${cardCenterY}`;
 
-                    const dashLen = 1200; // large enough for any curve length
-                    const delay = `${i * 0.35}s`;
-
                     return (
-                        <g key={i} filter="url(#glow2)">
-                            {/* Faint background stroke */}
-                            <path
-                                d={d}
-                                stroke="#f97316"
-                                strokeOpacity="0.18"
-                                strokeWidth="2"
-                                fill="none"
-                            />
-                            {/* Animated main stroke */}
+                        <g key={i}>
+                            {/* Primary connecting path (Orange) */}
                             <path
                                 d={d}
                                 stroke="url(#arrowGrad)"
                                 strokeWidth="2"
                                 fill="none"
                                 markerEnd="url(#ah)"
-                                strokeDasharray={`${dashLen} ${dashLen}`}
-                                strokeDashoffset={dashLen}
-                                style={{
-                                    animation: `arrowDraw 0.9s cubic-bezier(0.4,0,0.2,1) ${delay} forwards`,
-                                }}
+                                className="draw-path"
+                                style={{ animationDelay: `${i * 0.15}s` }}
                             />
-                            {/* Glowing endpoint dot */}
-                            <circle
-                                cx={endX - 2}
-                                cy={cardCenterY}
-                                r="4"
-                                fill="#fb923c"
-                                opacity="0"
+
+                            {/* Energy Beam / Light Flow effect (White Pulse) */}
+                            <path
+                                d={d}
+                                stroke="rgba(255,255,255,0.9)"
+                                strokeWidth="2.5"
+                                fill="none"
+                                strokeLinecap="round"
                                 style={{
-                                    animation: `dotFade 0.4s ease ${delay} forwards`,
-                                    animationDelay: `calc(${delay} + 0.7s)`,
+                                    strokeDasharray: '15 300',
+                                    strokeDashoffset: '300',
+                                    animation: `pulseFlow 2.5s ease-in-out infinite`,
+                                    animationDelay: `${i * 0.25 + 1}s`,
                                 }}
                             />
                         </g>
                     );
                 })}
 
+                {/* Unified Root Hub - glow filter only on this small element */}
+                <g filter="url(#glow2)">
+                    <circle cx={startX} cy={originY} r="8" fill="#f97316" />
+                    <circle cx={startX} cy={originY} r="12" fill="none" stroke="#f97316" strokeWidth="1" opacity="0.5">
+                        <animate attributeName="r" from="8" to="20" dur="2s" repeatCount="indefinite" />
+                        <animate attributeName="opacity" from="0.5" to="0" dur="2s" repeatCount="indefinite" />
+                    </circle>
+                </g>
+
                 <style>{`
-                    @keyframes arrowDraw {
-                        to { stroke-dashoffset: 0; }
+                    @keyframes drawPath {
+                        from { stroke-dashoffset: 5000; opacity: 0; }
+                        to   { stroke-dashoffset: 0;    opacity: 1; }
                     }
-                    @keyframes dotFade {
-                        to { opacity: 1; }
+                    .draw-path {
+                        stroke-dasharray: 5000;
+                        stroke-dashoffset: 5000;
+                        opacity: 0;
+                        animation: drawPath 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+                        will-change: stroke-dashoffset, opacity;
+                    }
+                    @keyframes pulseFlow {
+                        0%   { stroke-dashoffset: 300; opacity: 0; }
+                        10%  { opacity: 1; }
+                        85%  { opacity: 1; }
+                        100% { stroke-dashoffset: -20; opacity: 0; }
                     }
                 `}</style>
             </svg>
@@ -196,9 +197,9 @@ const About = () => {
     return (
         <div className="bg-gray-50 dark:bg-black transition-colors duration-500 min-h-screen relative overflow-hidden">
             <SEO title="About Us" description="Learn about the passionate team behind Pi Robo and our mission to democratize robotics education." />
-            {/* Ambient Multi-color Glows */}
-            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-orange-600/10 rounded-full blur-[120px] pointer-events-none"></div>
-            <div className="absolute top-[40%] left-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+            {/* Ambient Glows - cheap opacity-only compositing */}
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-600/8 rounded-full blur-[80px] pointer-events-none" style={{willChange:'auto'}}></div>
+            <div className="absolute top-[40%] left-0 w-[400px] h-[400px] bg-blue-600/8 rounded-full blur-[80px] pointer-events-none" style={{willChange:'auto'}}></div>
 
             {/* Hero */}
             <section className="relative overflow-hidden pt-32 pb-40 border-b border-gray-200 dark:border-white/10 z-10">
@@ -228,7 +229,7 @@ const About = () => {
                                 transition={{ delay: index * 0.1 }}
                                 viewport={{ once: true }}
                             >
-                                <Card className="p-8 text-center h-full hover:shadow-[0_0_30px_rgba(249,115,22,0.15)] transition-all duration-300 transform hover:-translate-y-2 border-t-2 border-t-orange-500 bg-white/80 dark:bg-gray-900/40 backdrop-blur-xl border-x-white/5 border-b-white/5">
+                                <Card className="p-8 text-center h-full hover:shadow-[0_0_30px_rgba(249,115,22,0.15)] transition-all duration-300 transform hover:-translate-y-2 border-t-2 border-t-orange-500 bg-white dark:bg-gray-900 border-x-white/5 border-b-white/5" style={{willChange:'transform'}}>
                                     <div className="w-16 h-16 bg-orange-500/10 rounded-full flex items-center justify-center mx-auto mb-6 text-orange-500 shadow-[0_0_20px_rgba(249,115,22,0.2)]">
                                         <value.icon size={32} />
                                     </div>
@@ -261,10 +262,11 @@ const About = () => {
                                         {index + 1}
                                     </div>
                                     <motion.div
-                                        className="w-5/12 bg-white/80 dark:bg-gray-900/40 backdrop-blur-xl p-6 rounded-2xl shadow-lg border border-gray-200 dark:border-white/10 hover:border-orange-500/30 transition-colors duration-300"
+                                        className="w-5/12 bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-lg border border-gray-200 dark:border-white/10 hover:border-orange-500/30 transition-colors duration-300"
                                         initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
                                         whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true }}
+                                        style={{ willChange: 'transform, opacity' }}
                                     >
                                         <span className="text-orange-500 font-bold block mb-2">{item.year}</span>
                                         <h3 className="text-lg font-bold text-gray-900 dark:text-white transition-colors mb-2">{item.title}</h3>
@@ -288,7 +290,7 @@ const About = () => {
             {/* Team Pyramid Model */}
             <section className="py-24 bg-gray-50 dark:bg-black transition-colors duration-500 relative overflow-hidden">
                 <div className="container mx-auto px-4 md:px-6 relative z-10">
-                    <div className="text-center mb-20" data-aos="fade-up">
+                    <div className="text-center mb-20">
                         <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white transition-colors mb-4 tracking-tight">Meet the Team</h2>
                         <p className="text-gray-600 dark:text-gray-400 transition-colors max-w-2xl mx-auto text-lg">The visionary minds and dedicated professionals behind the mission.</p>
                     </div>
@@ -299,50 +301,25 @@ const About = () => {
                         const others = team.filter((_, idx) => idx !== (founderIndex !== -1 ? founderIndex : 0));
 
                         return (
-                            <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-0 max-w-7xl mx-auto w-full relative">
+                            <div className="flex flex-col lg:flex-row justify-center items-stretch max-w-[1200px] mx-auto w-full relative gap-0">
                                 
                                 {/* First Column: Founder & CEO */}
-                                <div className="w-full lg:w-[35%] flex justify-center z-10 relative">
+                                <div className="w-full lg:w-[40%] flex justify-end items-center z-10 relative">
                                     <motion.div
-                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        initial={{ opacity: 0, scale: 0.95 }}
                                         whileInView={{ opacity: 1, scale: 1 }}
                                         viewport={{ once: true }}
+                                        transition={{ type: 'spring', stiffness: 260, damping: 20 }}
                                         className="bg-white/80 dark:bg-gray-900/40 backdrop-blur-xl p-10 rounded-3xl border border-orange-500/50 shadow-[0_0_50px_rgba(249,115,22,0.25)] text-center w-full max-w-[360px] transform hover:-translate-y-2 transition-transform duration-300 relative"
                                     >
                                         <div className="absolute inset-0 bg-gradient-to-b from-orange-500/10 to-transparent rounded-3xl pointer-events-none"></div>
                                         <div className="w-48 h-48 rounded-full mx-auto mb-8 bg-gray-50 dark:bg-black transition-colors duration-500 border-4 border-orange-500 shadow-[0_0_30px_rgba(249,115,22,0.4)] flex items-center justify-center overflow-hidden relative z-10 group/photo">
                                             {founder.image ? (
-                                                <img src={founder.image} alt={founder.name} className="w-full h-full object-cover transition-transform duration-700 group-hover/photo:scale-110" />
+                                        <img src={founder.image} alt={founder.name} className="w-full h-full object-cover transition-transform duration-700 group-hover/photo:scale-110" loading="lazy" />
                                             ) : (
                                                 <div className="text-7xl font-bold text-gray-900 dark:text-white transition-colors opacity-20">{founder.name.charAt(0)}</div>
                                             )}
-                                            {/* Social Overlay */}
-                                            <div className="absolute inset-0 bg-black/60 opacity-0 group-hover/photo:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 rounded-full">
-                                                {founder.instagram && (
-                                                    <a href={safeUrl(founder.instagram)} target="_blank" rel="noopener noreferrer"
-                                                        className="text-white hover:text-pink-400 transition-colors transform hover:scale-125 duration-200"
-                                                        onClick={(e) => e.stopPropagation()}
-                                                    >
-                                                        <InstagramIcon size={24} />
-                                                    </a>
-                                                )}
-                                                {founder.linkedin && (
-                                                    <a href={safeUrl(founder.linkedin)} target="_blank" rel="noopener noreferrer"
-                                                        className="text-white hover:text-blue-400 transition-colors transform hover:scale-125 duration-200"
-                                                        onClick={(e) => e.stopPropagation()}
-                                                    >
-                                                        <LinkedInIcon size={24} />
-                                                    </a>
-                                                )}
-                                                {founder.website && (
-                                                    <a href={safeUrl(founder.website)} target="_blank" rel="noopener noreferrer"
-                                                        className="text-white hover:text-orange-400 transition-colors transform hover:scale-125 duration-200"
-                                                        onClick={(e) => e.stopPropagation()}
-                                                    >
-                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                                                    </a>
-                                                )}
-                                            </div>
+
                                         </div>
                                         <h3 className="text-3xl font-extrabold text-gray-900 dark:text-white transition-colors mb-2 uppercase tracking-tight relative z-10">{founder.name}</h3>
                                         <p className="text-orange-500 font-bold text-lg tracking-wide relative z-10">{founder.role}</p>
@@ -375,63 +352,37 @@ const About = () => {
                                         </div>
                                     </motion.div>
 
-                                    {/* Desktop Anchor Point */}
-                                    <div className="hidden lg:block absolute right-[0px] lg:right-[-16px] top-1/2 -translate-y-1/2 w-6 h-6 bg-orange-500 rounded-full ring-4 ring-black shadow-[0_0_20px_#f97316] z-20"></div>
+                                    {/* Desktop Anchor Point removed - now inside the Unified SVG */}
                                 </div>
 
                                 {/* Curved Arrows Connector (Desktop only) */}
                                 <ArrowConnector count={others.length} />
 
                                 {/* Second Column: Other Team Members */}
-                                <div className="w-full lg:w-[45%] flex flex-col gap-6 z-10">
+                                <div className="w-full lg:w-[45%] flex flex-col gap-8 z-10 lg:pl-4 py-0">
                                     {others.map((member, index) => (
                                         <motion.div
                                             key={index}
-                                            initial={{ opacity: 0, x: 50 }}
+                                            initial={{ opacity: 0, x: -30 }}
                                             whileInView={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: index * 0.15, type: 'spring', stiffness: 100 }}
+                                            transition={{ delay: 0.5 + index * 0.15, type: 'spring', stiffness: 180, damping: 18 }}
                                             viewport={{ once: true }}
-                                            className="bg-white/80 dark:bg-gray-900/40 backdrop-blur-md p-5 rounded-2xl border border-white/5 hover:border-orange-500/40 hover:bg-gray-100 dark:bg-gray-800/80 shadow-lg hover:shadow-[0_0_30px_rgba(249,115,22,0.15)] flex items-center gap-6 group transition-all duration-300 w-full"
+                                            className="bg-gray-900/60 dark:bg-gray-900/60 p-5 rounded-2xl border border-white/5 hover:border-orange-500/40 shadow-lg hover:shadow-[0_0_30px_rgba(249,115,22,0.15)] flex items-center gap-6 group transition-all duration-300 w-full min-h-[160px] max-h-[160px]"
+                                            style={{ willChange: 'transform, opacity' }}
                                         >
                                             {/* Mobile Anchor Point (only visible if we need it, but we skip for mobile simplicity) */}
                                             
                                             <div className="w-24 h-24 rounded-full flex-shrink-0 bg-gray-50 dark:bg-black transition-colors duration-500 border-2 border-gray-200 dark:border-white/10 group-hover:border-orange-500/50 overflow-hidden flex items-center justify-center relative shadow-inner group/photo">
                                                 {member.image ? (
-                                                    <img src={member.image} alt={member.name} className="w-full h-full object-cover group-hover/photo:scale-110 transition-transform duration-500" />
+                                                    <img src={member.image} alt={member.name} className="w-full h-full object-cover group-hover/photo:scale-110 transition-transform duration-500" loading="lazy" />
                                                 ) : (
                                                     <div className="text-3xl font-bold text-gray-900 dark:text-white transition-colors opacity-20">{member.name.charAt(0)}</div>
                                                 )}
-                                                {/* Social Overlay */}
-                                                <div className="absolute inset-0 bg-black/65 opacity-0 group-hover/photo:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 rounded-full">
-                                                    {member.instagram && (
-                                                        <a href={safeUrl(member.instagram)} target="_blank" rel="noopener noreferrer"
-                                                            className="text-white hover:text-pink-400 transition-colors transform hover:scale-125 duration-200"
-                                                            onClick={(e) => e.stopPropagation()}
-                                                        >
-                                                            <InstagramIcon size={16} />
-                                                        </a>
-                                                    )}
-                                                    {member.linkedin && (
-                                                        <a href={safeUrl(member.linkedin)} target="_blank" rel="noopener noreferrer"
-                                                            className="text-white hover:text-blue-400 transition-colors transform hover:scale-125 duration-200"
-                                                            onClick={(e) => e.stopPropagation()}
-                                                        >
-                                                            <LinkedInIcon size={16} />
-                                                        </a>
-                                                    )}
-                                                    {member.website && (
-                                                        <a href={safeUrl(member.website)} target="_blank" rel="noopener noreferrer"
-                                                            className="text-white hover:text-orange-400 transition-colors transform hover:scale-125 duration-200"
-                                                            onClick={(e) => e.stopPropagation()}
-                                                        >
-                                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                                                        </a>
-                                                    )}
-                                                </div>
+
                                             </div>
-                                            <div className="flex-1">
-                                                <h3 className="text-xl font-bold text-gray-900 dark:text-white transition-colors group-hover:text-orange-400 transition-colors uppercase tracking-tight">{member.name}</h3>
-                                                <p className="text-orange-500/90 text-sm font-semibold tracking-wide mt-1">{member.role}</p>
+                                            <div className="flex-1 overflow-hidden">
+                                                <h3 className="text-xl font-bold text-gray-900 dark:text-white transition-colors group-hover:text-orange-400 transition-colors uppercase tracking-tight truncate">{member.name}</h3>
+                                                <p className="text-orange-500/90 text-sm font-semibold tracking-wide mt-1 truncate">{member.role}</p>
                                                 {/* Always-visible social icons */}
                                                 {(member.instagram || member.linkedin || member.website) && (
                                                     <div className="flex items-center gap-2 mt-2">

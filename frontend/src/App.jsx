@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/layout/Layout';
+import ScrollToTop from './components/ui/ScrollToTop';
 import Home from './pages/Home';
 import Courses from './pages/Courses';
 import Internship from './pages/Internship';
@@ -26,7 +27,7 @@ function App() {
     <ThemeProvider>
       <AuthProvider>
       <Router>
-
+        <ScrollToTop />
         <Routes>
           {/* Public Routes */}
           <Route element={<Layout />}>
