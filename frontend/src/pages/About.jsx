@@ -304,7 +304,7 @@ const About = () => {
                             <div className="flex flex-col lg:flex-row justify-center items-stretch max-w-[1200px] mx-auto w-full relative gap-0">
                                 
                                 {/* First Column: Founder & CEO */}
-                                <div className="w-full lg:w-[40%] flex justify-end items-center z-10 relative">
+                                <div className="w-full lg:w-[40%] flex justify-center lg:justify-end items-center z-10 relative">
                                     <motion.div
                                         initial={{ opacity: 0, scale: 0.95 }}
                                         whileInView={{ opacity: 1, scale: 1 }}
@@ -359,61 +359,67 @@ const About = () => {
                                 <ArrowConnector count={others.length} />
 
                                 {/* Second Column: Other Team Members */}
-                                <div className="w-full lg:w-[45%] flex flex-col gap-8 z-10 lg:pl-4 py-0">
+                                <div className="w-full lg:w-[45%] flex flex-col gap-8 z-10 lg:pl-4 py-0 mt-8 lg:mt-0">
                                     {others.map((member, index) => (
-                                        <motion.div
-                                            key={index}
-                                            initial={{ opacity: 0, x: -30 }}
-                                            whileInView={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: 0.5 + index * 0.15, type: 'spring', stiffness: 180, damping: 18 }}
-                                            viewport={{ once: true }}
-                                            className="bg-gray-900/60 dark:bg-gray-900/60 p-5 rounded-2xl border border-white/5 hover:border-orange-500/40 shadow-lg hover:shadow-[0_0_30px_rgba(249,115,22,0.15)] flex items-center gap-6 group transition-all duration-300 w-full min-h-[160px] max-h-[160px]"
-                                            style={{ willChange: 'transform, opacity' }}
-                                        >
-                                            {/* Mobile Anchor Point (only visible if we need it, but we skip for mobile simplicity) */}
-                                            
-                                            <div className="w-24 h-24 rounded-full flex-shrink-0 bg-gray-50 dark:bg-black transition-colors duration-500 border-2 border-gray-200 dark:border-white/10 group-hover:border-orange-500/50 overflow-hidden flex items-center justify-center relative shadow-inner group/photo">
-                                                {member.image ? (
-                                                    <img src={member.image} alt={member.name} className="w-full h-full object-cover group-hover/photo:scale-110 transition-transform duration-500" loading="lazy" />
-                                                ) : (
-                                                    <div className="text-3xl font-bold text-gray-900 dark:text-white transition-colors opacity-20">{member.name.charAt(0)}</div>
-                                                )}
+                                        <React.Fragment key={index}>
+                                            {/* Mobile Vertical Connector */}
+                                            <div className="lg:hidden flex flex-col items-center justify-center -my-4 z-0 w-full opacity-80">
+                                                <div className="w-0.5 h-8 bg-gradient-to-b from-orange-500 to-orange-400 opacity-60"></div>
+                                                <svg width="14" height="8" viewBox="0 0 12 6" fill="none">
+                                                    <path d="M1 1L6 5L11 1" stroke="#fb923c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                                </svg>
+                                            </div>
 
-                                            </div>
-                                            <div className="flex-1 overflow-hidden">
-                                                <h3 className="text-xl font-bold text-gray-900 dark:text-white transition-colors group-hover:text-orange-400 transition-colors uppercase tracking-tight truncate">{member.name}</h3>
-                                                <p className="text-orange-500/90 text-sm font-semibold tracking-wide mt-1 truncate">{member.role}</p>
-                                                {/* Always-visible social icons */}
-                                                {(member.instagram || member.linkedin || member.website) && (
-                                                    <div className="flex items-center gap-2 mt-2">
-                                                        {member.instagram && (
-                                                            <a href={safeUrl(member.instagram)} target="_blank" rel="noopener noreferrer"
-                                                                className="w-7 h-7 rounded-full bg-white/10 dark:bg-white/5 flex items-center justify-center text-pink-400 hover:bg-pink-500 hover:text-white transition-all duration-200 hover:scale-110"
-                                                                title="Instagram" onClick={(e) => e.stopPropagation()}
-                                                            >
-                                                                <InstagramIcon size={13} />
-                                                            </a>
-                                                        )}
-                                                        {member.linkedin && (
-                                                            <a href={safeUrl(member.linkedin)} target="_blank" rel="noopener noreferrer"
-                                                                className="w-7 h-7 rounded-full bg-white/10 dark:bg-white/5 flex items-center justify-center text-blue-400 hover:bg-blue-600 hover:text-white transition-all duration-200 hover:scale-110"
-                                                                title="LinkedIn" onClick={(e) => e.stopPropagation()}
-                                                            >
-                                                                <LinkedInIcon size={13} />
-                                                            </a>
-                                                        )}
-                                                        {member.website && (
-                                                            <a href={safeUrl(member.website)} target="_blank" rel="noopener noreferrer"
-                                                                className="w-7 h-7 rounded-full bg-white/10 dark:bg-white/5 flex items-center justify-center text-orange-400 hover:bg-orange-500 hover:text-white transition-all duration-200 hover:scale-110"
-                                                                title="Website" onClick={(e) => e.stopPropagation()}
-                                                            >
-                                                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                                                            </a>
-                                                        )}
-                                                    </div>
-                                                )}
-                                            </div>
-                                        </motion.div>
+                                            <motion.div
+                                                initial={{ opacity: 0, x: -30 }}
+                                                whileInView={{ opacity: 1, x: 0 }}
+                                                transition={{ delay: 0.2 + index * 0.15, type: 'spring', stiffness: 180, damping: 18 }}
+                                                viewport={{ once: true }}
+                                                className="bg-white/80 dark:bg-gray-900/60 backdrop-blur-md p-5 rounded-2xl border border-gray-200 dark:border-white/5 hover:border-orange-500/40 shadow-lg hover:shadow-[0_0_30px_rgba(249,115,22,0.15)] flex items-center gap-6 group transition-all duration-300 w-full min-h-[160px] max-h-[160px]"
+                                                style={{ willChange: 'transform, opacity' }}
+                                            >
+                                                <div className="w-24 h-24 rounded-full flex-shrink-0 bg-gray-50 dark:bg-black transition-colors duration-500 border-2 border-gray-200 dark:border-white/10 group-hover:border-orange-500/50 overflow-hidden flex items-center justify-center relative shadow-inner group/photo">
+                                                    {member.image ? (
+                                                        <img src={member.image} alt={member.name} className="w-full h-full object-cover group-hover/photo:scale-110 transition-transform duration-500" loading="lazy" />
+                                                    ) : (
+                                                        <div className="text-3xl font-bold text-gray-900 dark:text-white transition-colors opacity-20">{member.name.charAt(0)}</div>
+                                                    )}
+                                                </div>
+                                                <div className="flex-1 overflow-hidden">
+                                                    <h3 className="text-xl font-bold text-gray-900 dark:text-white transition-colors group-hover:text-orange-500 transition-colors uppercase tracking-tight truncate">{member.name}</h3>
+                                                    <p className="text-orange-600 dark:text-orange-500/90 text-sm font-semibold tracking-wide mt-1 truncate">{member.role}</p>
+                                                    {/* Social icons */}
+                                                    {(member.instagram || member.linkedin || member.website) && (
+                                                        <div className="flex items-center gap-2 mt-3">
+                                                            {member.instagram && (
+                                                                <a href={safeUrl(member.instagram)} target="_blank" rel="noopener noreferrer"
+                                                                    className="w-8 h-8 rounded-full bg-gray-100 dark:bg-white/5 flex items-center justify-center text-pink-500 dark:text-pink-400 hover:bg-pink-500 hover:text-white transition-all duration-200 hover:scale-110"
+                                                                    title="Instagram" onClick={(e) => e.stopPropagation()}
+                                                                >
+                                                                    <InstagramIcon size={14} />
+                                                                </a>
+                                                            )}
+                                                            {member.linkedin && (
+                                                                <a href={safeUrl(member.linkedin)} target="_blank" rel="noopener noreferrer"
+                                                                    className="w-8 h-8 rounded-full bg-gray-100 dark:bg-white/5 flex items-center justify-center text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white transition-all duration-200 hover:scale-110"
+                                                                    title="LinkedIn" onClick={(e) => e.stopPropagation()}
+                                                                >
+                                                                    <LinkedInIcon size={14} />
+                                                                </a>
+                                                            )}
+                                                            {member.website && (
+                                                                <a href={safeUrl(member.website)} target="_blank" rel="noopener noreferrer"
+                                                                    className="w-8 h-8 rounded-full bg-gray-100 dark:bg-white/5 flex items-center justify-center text-orange-500 dark:text-orange-400 hover:bg-orange-500 hover:text-white transition-all duration-200 hover:scale-110"
+                                                                    title="Website" onClick={(e) => e.stopPropagation()}
+                                                                >
+                                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                                                                </a>
+                                                            )}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </motion.div>
+                                        </React.Fragment>
                                     ))}
                                     
                                     {others.length === 0 && (
