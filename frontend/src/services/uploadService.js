@@ -5,7 +5,7 @@ const uploadService = {
      * Compresses and converts an image to a Data URL to save space in Firestore.
      * Bypasses Firebase Storage since the user is on the free Spark plan.
      */
-    uploadFile: async (file, path = 'uploads') => {
+    uploadFile: async (file, path = 'uploads', maxWidth = 1200, quality = 0.9) => {
         return new Promise((resolve, reject) => {
             if (!file || !file.type.startsWith('image/')) {
                 return reject(new Error("File is not an image"));
@@ -19,8 +19,8 @@ const uploadService = {
             
             img.onload = () => {
                 const canvas = document.createElement('canvas');
-                // Standardize size to 400x400 for team profiles to keep Firestore documents well under 1MB
-                const MAX_SIZE = 400;
+                // Allow dynamic max size based on context (Gallery vs Profile)
+                const MAX_SIZE = maxWidth;
                 let width = img.width;
                 let height = img.height;
 
@@ -41,8 +41,8 @@ const uploadService = {
                 const ctx = canvas.getContext('2d');
                 ctx.drawImage(img, 0, 0, width, height);
                 
-                // Compress to JPEG with 0.8 quality
-                const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+                // Use higher quality for the Data URL
+                const dataUrl = canvas.toDataURL('image/jpeg', quality);
                 resolve(dataUrl);
             };
 
