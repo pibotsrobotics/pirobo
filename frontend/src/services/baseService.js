@@ -61,8 +61,14 @@ class BaseService {
             this._localSet([...all, newItem]);
             return newItem;
         }
-        const docRef = await addDoc(collection(db, this.collectionName), payload);
-        return { id: docRef.id, ...payload };
+        try {
+            const docRef = await addDoc(collection(db, this.collectionName), payload);
+            return { id: docRef.id, ...payload };
+        } catch (error) {
+            console.error(`[${this.collectionName}] Create failed:`, error);
+            alert(`Database Write Error: ${error.message}\nIf this is a permission error, please update your Firestore Rules to allow writes.`);
+            throw error;
+        }
     }
 
     // --- UPDATE ---
@@ -76,9 +82,15 @@ class BaseService {
             this._localSet(updated);
             return { id, ...data };
         }
-        const itemRef = doc(db, this.collectionName, id);
-        await updateDoc(itemRef, data);
-        return { id, ...data };
+        try {
+            const itemRef = doc(db, this.collectionName, id);
+            await updateDoc(itemRef, data);
+            return { id, ...data };
+        } catch (error) {
+            console.error(`[${this.collectionName}] Update failed:`, error);
+            alert(`Database Update Error: ${error.message}\nPlease check your Firestore Security Rules.`);
+            throw error;
+        }
     }
 
     // --- DELETE ---
@@ -87,8 +99,14 @@ class BaseService {
             this._localSet(this._localGet().filter(item => item.id !== id));
             return true;
         }
-        await deleteDoc(doc(db, this.collectionName, id));
-        return true;
+        try {
+            await deleteDoc(doc(db, this.collectionName, id));
+            return true;
+        } catch (error) {
+            console.error(`[${this.collectionName}] Delete failed:`, error);
+            alert(`Database Delete Error: ${error.message}\nPlease check your Firestore Security Rules to allow deletions.`);
+            throw error;
+        }
     }
 }
 
