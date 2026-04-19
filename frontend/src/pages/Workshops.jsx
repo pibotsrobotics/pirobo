@@ -9,41 +9,7 @@ import Input from '../components/ui/Input';
 import { Calendar, MapPin, Clock, ExternalLink } from 'lucide-react';
 import { eventService, registrationService } from '../services';
 
-const initialEvents = [
-    {
-        id: "init1",
-        title: "Robotics Workshop 2024",
-        date: "2024-02-15",
-        time: "10:00 AM",
-        location: "Pi Robo Center",
-        type: "Workshop",
-        image: "bg-blue-600/20",
-        description: "A hands-on workshop to build your first robot. Kits will be provided.",
-        fee: "Free"
-    },
-    {
-        id: "init2",
-        title: "AI Hackathon",
-        date: "2024-03-01",
-        time: "09:00 AM",
-        location: "Online",
-        type: "Competition",
-        image: "bg-purple-600/20",
-        description: "24-hour hackathon to solve real-world problems using AI.",
-        fee: "₹500"
-    },
-    {
-        id: "init3",
-        title: "IoT Seminar",
-        date: "2024-03-10",
-        time: "2:00 PM",
-        location: "City Hall",
-        type: "Seminar",
-        image: "bg-green-600/20",
-        description: "Experts discuss the future of IoT and Smart Cities.",
-        fee: "Free"
-    },
-];
+
 
 const Workshops = () => {
     const [events, setEvents] = useState([]);
@@ -61,13 +27,7 @@ const Workshops = () => {
     const loadEvents = async () => {
         setLoading(true);
         try {
-            let data = await eventService.getAll();
-            if (data.length === 0) {
-                if (!localStorage.getItem('events')) {
-                    for (const e of initialEvents) await eventService.create(e);
-                    data = await eventService.getAll();
-                }
-            }
+            const data = await eventService.getAll();
             setEvents(data);
         } catch (error) {
             console.error("Failed loading events", error);
@@ -133,7 +93,13 @@ const Workshops = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {loading ? (
-                        <div className="col-span-full text-center text-gray-600 dark:text-gray-400 transition-colors">Loading events...</div>
+                        <div className="col-span-full text-center py-20 text-gray-600 dark:text-gray-400 transition-colors">Loading events...</div>
+                    ) : events.length === 0 ? (
+                        <div className="col-span-full text-center py-20 bg-white/50 dark:bg-gray-900/30 border border-dashed border-gray-200 dark:border-white/10 rounded-2xl flex flex-col items-center justify-center">
+                            <Calendar size={52} className="mb-4 text-orange-500/30" />
+                            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">No Events Scheduled Yet</h3>
+                            <p className="text-gray-500 dark:text-gray-400">Stay tuned! Upcoming workshops and events will appear here.</p>
+                        </div>
                     ) : (
                         events.map((event, index) => (
                             <div key={event.id} data-aos="fade-up" data-aos-delay={index * 100} className="h-full">

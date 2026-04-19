@@ -43,6 +43,8 @@ const ManageCourses = () => {
             setValue('category', course.category);
             setValue('level', course.level || 'Beginner'); // default if missing
             setValue('price', course.price);
+            setValue('duration', course.duration || '');
+            setValue('feature', course.features ? course.features[0] : '');
             setValue('image', course.image || '');
             setPreviewImage(course.image || '');
         } else {
@@ -60,13 +62,21 @@ const ManageCourses = () => {
     };
 
     const onSubmit = async (data) => {
+        const payload = {
+            ...data,
+            features: data.feature ? [data.feature] : ['Hands-on'],
+            rating: 4.8, // Default rating
+            reviews: 120, // Default reviews
+        };
+        delete payload.feature; // cleanup internal param
+
         if (editingCourse) {
             // Update existing
-            await courseService.update(editingCourse.id, data);
+            await courseService.update(editingCourse.id, payload);
             setToastMessage(`${data.title} updated successfully!`);
         } else {
             // Add new
-            await courseService.create(data);
+            await courseService.create(payload);
             setToastMessage(`${data.title} successfully added!`);
         }
         await loadCourses(); // Reload list
@@ -251,6 +261,25 @@ const ManageCourses = () => {
                                 <option value="Advanced">Advanced</option>
                             </select>
                             {errors.level && <span className="text-xs text-red-500 font-medium block mt-1">{errors.level.message}</span>}
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-5">
+                        <div>
+                            <label className="block text-xs font-bold text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-widest">Duration</label>
+                            <Input
+                                placeholder="e.g. 8 Weeks"
+                                className="bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white rounded-xl focus:border-orange-500/50 focus:ring-2 focus:ring-orange-500/20 w-full font-medium"
+                                {...register('duration')}
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-xs font-bold text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-widest">Key Feature</label>
+                            <Input
+                                placeholder="e.g. Build 5 Robots"
+                                className="bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white rounded-xl focus:border-orange-500/50 focus:ring-2 focus:ring-orange-500/20 w-full font-medium"
+                                {...register('feature')}
+                            />
                         </div>
                     </div>
 

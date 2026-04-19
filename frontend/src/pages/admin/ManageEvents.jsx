@@ -44,6 +44,7 @@ const ManageEvents = () => {
             setValue('location', event.location);
             setValue('fee', event.fee || 'Free');
             setValue('type', event.type);
+            setValue('description', event.description || '');
             setValue('image', event.image || '');
             setPreviewImage(event.image || '');
         } else {
@@ -234,6 +235,16 @@ const ManageEvents = () => {
                             placeholder="e.g. ₹500 or Free" 
                             className="bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white rounded-xl px-4 py-3 focus:outline-none focus:border-orange-500/60 transition-colors placeholder-gray-400 text-sm font-medium w-full" 
                             {...register('fee')} 
+                        />
+                    </div>
+
+                    <div>
+                        <label className="block text-xs font-bold text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-widest">Description</label>
+                        <textarea
+                            placeholder="Event details..."
+                            rows="3"
+                            className="bg-gray-50 dark:bg-black/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white rounded-xl px-4 py-3 focus:outline-none focus:border-orange-500/60 transition-colors placeholder-gray-400 text-sm font-medium w-full"
+                            {...register('description')}
                         />
                     </div>
 

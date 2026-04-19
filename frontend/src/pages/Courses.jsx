@@ -9,44 +9,7 @@ import { Search, Filter, Clock, BookOpen, Star } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { courseService, registrationService } from '../services';
 
-const initialData = [
-    {
-        id: 1,
-        title: 'Robotics for Beginners',
-        category: 'Robotics',
-        level: 'Beginner',
-        duration: '8 Weeks',
-        features: ['Build 5 Robots', 'Kit Included'],
-        rating: 4.8,
-        reviews: 120,
-        price: '₹4,999',
-        image: 'bg-orange-900/50',
-    },
-    {
-        id: 2,
-        title: 'Advanced AI & ML',
-        category: 'AI',
-        level: 'Advanced',
-        duration: '12 Weeks',
-        features: ['Python Mastery', 'Neural Nets'],
-        rating: 4.9,
-        reviews: 85,
-        price: '₹7,999',
-        image: 'bg-purple-900/50',
-    },
-    {
-        id: 3,
-        title: 'Web Development Bootcamp',
-        category: 'Coding',
-        level: 'Intermediate',
-        duration: '10 Weeks',
-        features: ['React & Node.js', 'Full Stack Project'],
-        rating: 4.7,
-        reviews: 200,
-        price: '₹5,999',
-        image: 'bg-blue-900/50',
-    },
-];
+
 
 const Courses = () => {
     const [courses, setCourses] = useState([]);
@@ -68,13 +31,7 @@ const Courses = () => {
     const loadCourses = async () => {
         setLoading(true);
         try {
-            let data = await courseService.getAll();
-            if (data.length === 0) {
-                if (!localStorage.getItem('courses')) {
-                    for (const c of initialData) await courseService.create(c);
-                    data = await courseService.getAll();
-                }
-            }
+            const data = await courseService.getAll();
             setCourses(data);
         } catch (error) {
             console.error("Failed to load courses", error);
@@ -240,9 +197,15 @@ const Courses = () => {
                             </motion.div>
                         ))}
                     </div>
+                ) : courses.length === 0 ? (
+                    <div className="text-center py-20 bg-white/50 dark:bg-gray-900/30 border border-dashed border-gray-200 dark:border-white/10 rounded-2xl flex flex-col items-center justify-center">
+                        <BookOpen size={52} className="mb-4 text-orange-500/30" />
+                        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">No Courses Available Yet</h3>
+                        <p className="text-gray-500 dark:text-gray-400">Our team is preparing amazing courses. Check back soon!</p>
+                    </div>
                 ) : (
                     <div className="text-center py-20">
-                        <h3 className="text-xl font-semibold text-gray-900 dark:text-white transition-colors">No courses found</h3>
+                        <h3 className="text-xl font-semibold text-gray-900 dark:text-white transition-colors">No courses match your filters</h3>
                         <p className="text-gray-600 dark:text-gray-400 transition-colors">Try adjusting your filters or search terms.</p>
                         <Button
                             variant="outline"
