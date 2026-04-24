@@ -14,9 +14,9 @@ class BaseService {
     }
 
     _isFirebaseConfigured() {
-        // db is a real Firestore instance if Firebase was initialized,
-        // or an empty object {} if mock mode (no env vars)
-        return db && typeof db.type === 'string'; // Firestore instances have a `type` property
+        // Real Firestore instances have a type 'firestore'
+        // If it's a mock {} object, this will be false
+        return !!(db && (db.type === 'firestore' || typeof db.type === 'string'));
     }
 
     // --- LocalStorage helpers (fallback only) ---
@@ -38,7 +38,8 @@ class BaseService {
         }
         try {
             const snapshot = await getDocs(collection(db, this.collectionName));
-            let data = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+            // Ensure document ID (d.id) is NEVER overwritten by a field named 'id' inside the data
+            let data = snapshot.docs.map(d => ({ ...d.data(), id: d.id }));
             // Sort by createdAt ascending (oldest added shows up first)
             data.sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
             return data;
@@ -83,12 +84,14 @@ class BaseService {
             return { id, ...data };
         }
         try {
-            const itemRef = doc(db, this.collectionName, id);
+            if (!id) throw new Error("Missing document ID");
+            const docId = String(id);
+            const itemRef = doc(db, this.collectionName, docId);
             await updateDoc(itemRef, data);
-            return { id, ...data };
+            return { id: docId, ...data };
         } catch (error) {
             console.error(`[${this.collectionName}] Update failed:`, error);
-            alert(`Database Update Error: ${error.message}\nPlease check your Firestore Security Rules.`);
+            alert(`Database Update Error (ID: ${id}): ${error.message}\nPlease check your Firestore Security Rules if this is a permission issue.`);
             throw error;
         }
     }
@@ -100,11 +103,13 @@ class BaseService {
             return true;
         }
         try {
-            await deleteDoc(doc(db, this.collectionName, id));
+            if (!id) throw new Error("Missing document ID");
+            const docId = String(id);
+            await deleteDoc(doc(db, this.collectionName, docId));
             return true;
         } catch (error) {
             console.error(`[${this.collectionName}] Delete failed:`, error);
-            alert(`Database Delete Error: ${error.message}\nPlease check your Firestore Security Rules to allow deletions.`);
+            alert(`Database Delete Error (ID: ${id}): ${error.message}\nIf this is a "r.indexOf" error, the ID might be invalid. Otherwise, check your Security Rules.`);
             throw error;
         }
     }

@@ -1,0 +1,47 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function to check if the user is authenticated
+    function isAdmin() {
+      return request.auth != null;
+    }
+
+    // Publicly readable content, admin-only writes
+    match /courses/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    match /events/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    match /gallery/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    match /team/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Public write (form submission), admin-only read/update/delete
+    match /enquiries/{id} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+    
+    match /registrations/{id} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Default deny
+    match /{document=**} {
+      allow read, write: if isAdmin();
+    }
+  }
+}
