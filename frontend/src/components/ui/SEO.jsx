@@ -29,6 +29,16 @@ const SEO = ({
       <meta property="twitter:title" content={siteTitle} />
       <meta property="twitter:description" content={description} />
       <meta property="twitter:image" content="https://www.pibots.in/logo-3.png" />
+
+      {/* Structured Data for Google Site Name */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "Pi BOTS",
+          "url": "https://www.pibots.in/"
+        })}
+      </script>
     </Helmet>
   );
 };
