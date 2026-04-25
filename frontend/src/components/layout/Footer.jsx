@@ -90,7 +90,7 @@ const Footer = () => {
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade"
                             className="absolute inset-0 grayscale contrast-125 opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
-                            title="Pi Robo Location"
+                            title="Pi Bots Location"
                         ></iframe>
                         {/* Overlay to encourage interaction */}
                         <div className="absolute bottom-4 left-4 bg-black/80 px-3 py-1 text-xs text-white rounded backdrop-blur-sm pointer-events-none">

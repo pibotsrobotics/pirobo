@@ -20,7 +20,7 @@ const Card = ({ children, className, hover = false, ...props }) => {
 };
 
 export const CardHeader = ({ children, className }) => (
-    <div className={twMerge('p-6 border-b border-gray-800', className)}>{children}</div>
+    <div className={twMerge('p-6 border-b border-gray-200 dark:border-gray-800', className)}>{children}</div>
 );
 
 export const CardContent = ({ children, className }) => (
@@ -28,7 +28,7 @@ export const CardContent = ({ children, className }) => (
 );
 
 export const CardFooter = ({ children, className }) => (
-    <div className={twMerge('p-6 bg-black/50 border-t border-gray-800', className)}>{children}</div>
+    <div className={twMerge('p-6 bg-gray-50 dark:bg-black/50 border-t border-gray-200 dark:border-gray-800', className)}>{children}</div>
 );
 
 export default Card;
