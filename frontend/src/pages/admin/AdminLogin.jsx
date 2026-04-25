@@ -96,7 +96,7 @@ const AdminLogin = () => {
                             <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-orange-500 transition-colors z-10" size={18} />
                             <Input
                                 type="email"
-                                placeholder="admin@pibots.in"
+                                placeholder="admin@pirobo.com"
                                 className="pl-11 py-3 bg-black/50 border border-gray-700/50 text-white rounded-xl focus:border-orange-500/50 focus:ring-2 focus:ring-orange-500/20 transition-all w-full"
                                 {...register('email', { required: 'Email is required' })}
                             />

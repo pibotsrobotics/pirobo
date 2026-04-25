@@ -1,5 +1,5 @@
-import React from 'react';
 import { Instagram, Linkedin, Youtube, Mail, Phone, MapPin } from 'lucide-react';
+import Logo from '../ui/Logo';
 
 const Footer = () => {
     return (
@@ -13,7 +13,10 @@ const Footer = () => {
                     {/* Left Side: Contact Info */}
                     <div className="space-y-8">
                         <div>
-                            <h3 className="text-2xl font-bold text-white mb-6 tracking-tight">Pi <span className="text-orange-500">Robo</span></h3>
+                            <div className="flex items-center gap-2 mb-6">
+                                <Logo className="h-8 w-auto" />
+                                <h3 className="text-2xl font-bold text-white tracking-tight">Pi <span className="text-orange-500">Bots</span></h3>
+                            </div>
                             <p className="text-gray-400 text-sm mb-6 leading-relaxed">
                                 Empowering the next generation of innovators with futuristic skills in Robotics, Artificial Intelligence, and Coding.
                             </p>
@@ -46,13 +49,13 @@ const Footer = () => {
                         <div>
                             <h3 className="text-lg font-bold text-white mb-4">Connect With Us</h3>
                             <div className="flex gap-4">
-                                <a href="https://www.instagram.com/pibots.learning" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-900 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-orange-600 hover:text-white hover:border-orange-500 hover:shadow-[0_0_15px_rgba(249,115,22,0.4)] transition-all duration-300 transform hover:-translate-y-1">
+                                <a href="https://www.instagram.com/pirobo.learning" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-900 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-orange-600 hover:text-white hover:border-orange-500 hover:shadow-[0_0_15px_rgba(249,115,22,0.4)] transition-all duration-300 transform hover:-translate-y-1">
                                     <Instagram size={18} />
                                 </a>
-                                <a href="https://www.linkedin.com/company/pibots" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-900 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-blue-600 hover:text-white hover:border-blue-500 hover:shadow-[0_0_15px_rgba(37,99,235,0.4)] transition-all duration-300 transform hover:-translate-y-1">
+                                <a href="https://www.linkedin.com/company/pirobo" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-900 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-blue-600 hover:text-white hover:border-blue-500 hover:shadow-[0_0_15px_rgba(37,99,235,0.4)] transition-all duration-300 transform hover:-translate-y-1">
                                     <Linkedin size={18} />
                                 </a>
-                                <a href="https://www.youtube.com/@pibots" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-900 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-red-600 hover:text-white hover:border-red-500 hover:shadow-[0_0_15px_rgba(220,38,38,0.4)] transition-all duration-300 transform hover:-translate-y-1">
+                                <a href="https://www.youtube.com/@pirobo" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-900 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-red-600 hover:text-white hover:border-red-500 hover:shadow-[0_0_15px_rgba(220,38,38,0.4)] transition-all duration-300 transform hover:-translate-y-1">
                                     <Youtube size={18} />
                                 </a>
                             </div>
@@ -62,14 +65,14 @@ const Footer = () => {
                         <div>
                             <h3 className="text-lg font-bold text-white mb-4">Newsletter</h3>
                             <p className="text-sm text-gray-400 mb-4">Get the latest updates on courses and events.</p>
-                            <form className="flex bg-gray-900/50 backdrop-blur-sm rounded-lg overflow-hidden border border-white/10 focus-within:border-orange-500 focus-within:shadow-[0_0_15px_rgba(249,115,22,0.2)] transition-all duration-300" onSubmit={(e) => e.preventDefault()}>
+                            <form className="flex bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden border border-white/10 focus-within:border-orange-500 transition-all duration-300" onSubmit={(e) => e.preventDefault()}>
                                 <input 
                                     type="email" 
                                     placeholder="Enter your email" 
-                                    className="w-full bg-transparent px-4 py-2 text-sm text-white outline-none placeholder-gray-500" 
+                                    className="w-full bg-transparent px-4 py-3 text-sm text-white outline-none placeholder-gray-500" 
                                     required
                                 />
-                                <button type="submit" className="bg-orange-600 text-white px-4 py-2 text-sm font-bold hover:bg-orange-500 transition-colors">
+                                <button type="submit" className="bg-orange-600 text-white px-6 py-3 text-sm font-bold hover:bg-orange-500 transition-colors">
                                     Subscribe
                                 </button>
                             </form>
@@ -87,7 +90,7 @@ const Footer = () => {
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade"
                             className="absolute inset-0 grayscale contrast-125 opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
-                            title="Pi Bots Location"
+                            title="Pi Robo Location"
                         ></iframe>
                         {/* Overlay to encourage interaction */}
                         <div className="absolute bottom-4 left-4 bg-black/80 px-3 py-1 text-xs text-white rounded backdrop-blur-sm pointer-events-none">

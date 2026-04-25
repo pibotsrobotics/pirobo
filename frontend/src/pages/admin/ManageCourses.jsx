@@ -129,7 +129,7 @@ const ManageCourses = () => {
                                         {course.image ? (
                                             <img src={course.image} alt={course.title} className="w-full h-full object-cover" />
                                         ) : (
-                                            <div className="w-full h-full flex items-center justify-center text-gray-400 dark:text-gray-700 text-xs text-center p-1 font-bold italic">PI BOTS</div>
+                                            <div className="w-full h-full flex items-center justify-center text-gray-400 dark:text-gray-700 text-xs text-center p-1 font-bold italic">PI ROBO</div>
                                         )}
                                     </div>
                                     <div>

@@ -33,7 +33,7 @@ try {
 
     const MOCK_USER = {
         uid: "mock-admin-id",
-        email: "admin@pibots.in",
+        email: "admin@pirobo.com",
         displayName: "Admin User",
         emailVerified: true
     };
@@ -55,13 +55,13 @@ try {
         signInWithEmailAndPassword: (authInstance, email, password) => {
             return new Promise((resolve, reject) => {
                 // HARDCODED CREDENTIALS FOR DEMO
-                if (email === "admin@pibots.in" && password === "admin123") {
+                if (email === "admin@pirobo.com" && password === "admin123") {
                     sessionStorage.setItem('mock_auth_user', JSON.stringify(MOCK_USER));
                     auth.currentUser = MOCK_USER;
                     // NO RELOAD - handled by Context
                     resolve({ user: MOCK_USER });
                 } else {
-                    reject(new Error("Invalid email or password (Try: admin@pibots.in / admin123)"));
+                    reject(new Error("Invalid email or password (Try: admin@pirobo.com / admin123)"));
                 }
             });
         },

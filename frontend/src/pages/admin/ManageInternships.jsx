@@ -125,7 +125,7 @@ const ManageInternships = () => {
             doc.setFontSize(9);
             doc.setTextColor(150, 150, 150);
             doc.text("Pi Bots Education - Transforming the Future with Technology", 14, pageHeight - 15);
-            doc.text("www.pibots.in", 196, pageHeight - 15, { align: 'right' });
+            doc.text("www.pirobo.com", 196, pageHeight - 15, { align: 'right' });
 
             doc.save(`Internship_Application_${app.name.replace(/\s+/g, '_')}.pdf`);
         } catch (error) {
