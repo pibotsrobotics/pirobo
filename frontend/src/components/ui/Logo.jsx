@@ -11,7 +11,7 @@ const Logo = ({ className = "h-8 w-auto", forceTheme, ...props }) => {
     return (
         <img 
             src={logoSrc} 
-            alt="Pi Bots Logo" 
+            alt="Pi BOTS Logo" 
             className={`${className} object-contain`}
             loading="eager"
             decoding="sync"

@@ -196,7 +196,7 @@ const About = () => {
 
     return (
         <div className="bg-gray-50 dark:bg-black transition-colors duration-500 min-h-screen relative overflow-hidden">
-            <SEO title="About Us" description="Learn about the passionate team behind Pi Bots and our mission to democratize robotics education." />
+            <SEO title="About Us" description="Learn about the passionate team behind Pi BOTS and our mission to democratize robotics education." />
             {/* Ambient Glows - cheap opacity-only compositing */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-600/8 rounded-full blur-[80px] pointer-events-none" style={{willChange:'auto'}}></div>
             <div className="absolute top-[40%] left-0 w-[400px] h-[400px] bg-blue-600/8 rounded-full blur-[80px] pointer-events-none" style={{willChange:'auto'}}></div>

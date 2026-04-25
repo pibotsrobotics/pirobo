@@ -82,7 +82,7 @@ function Gallery() {
                   className="w-full h-auto transform transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                  <span className="text-white font-bold text-lg mb-1">{image.alt || 'Pi Bots Action'}</span>
+                  <span className="text-white font-bold text-lg mb-1">{image.alt || 'Pi BOTS Action'}</span>
                   <span className="text-orange-400 text-sm font-medium">{image.category}</span>
                 </div>
               </motion.div>

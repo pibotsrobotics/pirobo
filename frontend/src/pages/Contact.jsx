@@ -40,7 +40,7 @@ const Contact = () => {
                         },
                         body: JSON.stringify({
                             access_key: web3FormsKey,
-                            subject: "New Contact Form Enquiry - Pi Bots",
+                            subject: "New Contact Form Enquiry - Pi BOTS",
                             from_name: data.name,
                             email: data.email,
                             phone: data.phone,
@@ -65,12 +65,12 @@ const Contact = () => {
     const contactInfo = [
         { title: 'Phone', value: '+91 91884 11223', icon: Phone, color: 'text-orange-500 bg-orange-500/10' },
         { title: 'Email', value: 'pibotsacademy@gmail.com', icon: Mail, color: 'text-green-400 bg-green-500/10' },
-        { title: 'Location', value: 'Pibots Makerhub, Mampad, Kerala 676542', icon: MapPin, color: 'text-red-400 bg-red-500/10' },
+        { title: 'Location', value: 'Pi BOTS Makerhub, Mampad, Kerala 676542', icon: MapPin, color: 'text-red-400 bg-red-500/10' },
     ];
 
     return (
         <div className="bg-gray-50 dark:bg-black transition-colors duration-500 min-h-screen py-12 relative overflow-hidden">
-            <SEO title="Contact Us" description="Get in touch with Pi Bots. We're here to answer any questions about our robotics courses, workshops, or partnerships." />
+            <SEO title="Contact Us" description="Get in touch with Pi BOTS. We're here to answer any questions about our robotics courses, workshops, or partnerships." />
             {/* Ambient Background Glow */}
             <div className="absolute top-20 right-1/4 w-[400px] h-[400px] bg-orange-600/10 rounded-full blur-[100px] pointer-events-none"></div>
             <div className="absolute bottom-20 left-1/4 w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none"></div>
@@ -110,7 +110,7 @@ const Contact = () => {
                                 allowFullScreen=""
                                 loading="lazy"
                                 referrerPolicy="no-referrer-when-downgrade"
-                                title="Pibots Makerhub Location"
+                                title="Pi BOTS Makerhub Location"
                             ></iframe>
                         </div>
 
