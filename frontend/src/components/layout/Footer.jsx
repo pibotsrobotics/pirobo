@@ -46,13 +46,13 @@ const Footer = () => {
                         <div>
                             <h3 className="text-lg font-bold text-white mb-4">Connect With Us</h3>
                             <div className="flex gap-4">
-                                <a href="https://www.instagram.com/pirobo.learning" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-900 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-orange-600 hover:text-white hover:border-orange-500 hover:shadow-[0_0_15px_rgba(249,115,22,0.4)] transition-all duration-300 transform hover:-translate-y-1">
+                                <a href="https://www.instagram.com/pibots.learning" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-900 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-orange-600 hover:text-white hover:border-orange-500 hover:shadow-[0_0_15px_rgba(249,115,22,0.4)] transition-all duration-300 transform hover:-translate-y-1">
                                     <Instagram size={18} />
                                 </a>
-                                <a href="https://www.linkedin.com/company/pirobo" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-900 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-blue-600 hover:text-white hover:border-blue-500 hover:shadow-[0_0_15px_rgba(37,99,235,0.4)] transition-all duration-300 transform hover:-translate-y-1">
+                                <a href="https://www.linkedin.com/company/pibots" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-900 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-blue-600 hover:text-white hover:border-blue-500 hover:shadow-[0_0_15px_rgba(37,99,235,0.4)] transition-all duration-300 transform hover:-translate-y-1">
                                     <Linkedin size={18} />
                                 </a>
-                                <a href="https://www.youtube.com/@pirobo" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-900 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-red-600 hover:text-white hover:border-red-500 hover:shadow-[0_0_15px_rgba(220,38,38,0.4)] transition-all duration-300 transform hover:-translate-y-1">
+                                <a href="https://www.youtube.com/@pibots" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-900 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-red-600 hover:text-white hover:border-red-500 hover:shadow-[0_0_15px_rgba(220,38,38,0.4)] transition-all duration-300 transform hover:-translate-y-1">
                                     <Youtube size={18} />
                                 </a>
                             </div>
@@ -87,18 +87,18 @@ const Footer = () => {
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade"
                             className="absolute inset-0 grayscale contrast-125 opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
-                            title="Pi Robo Location"
+                            title="Pi Bots Location"
                         ></iframe>
                         {/* Overlay to encourage interaction */}
                         <div className="absolute bottom-4 left-4 bg-black/80 px-3 py-1 text-xs text-white rounded backdrop-blur-sm pointer-events-none">
-                            Run by Pi Robo
+                            Run by Pi Bots
                         </div>
                     </div>
 
                 </div>
 
                 <div className="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between text-sm text-gray-500">
-                    <div>&copy; {new Date().getFullYear()} Pi Robo. All rights reserved.</div>
+                    <div>&copy; {new Date().getFullYear()} Pi Bots. All rights reserved.</div>
                     <div className="mt-4 md:mt-0 flex gap-6">
                         <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
                         <a href="#" className="hover:text-white transition-colors">Terms of Service</a>

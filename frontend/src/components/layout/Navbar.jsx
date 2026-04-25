@@ -35,7 +35,7 @@ const Navbar = () => {
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
                     <Link to="/" className="text-2xl font-bold text-orange-500 tracking-tight">
-                        Pi Robo
+                        Pi Bots
                     </Link>
 
                     {/* Desktop Menu */}

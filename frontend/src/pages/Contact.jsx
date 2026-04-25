@@ -40,7 +40,7 @@ const Contact = () => {
                         },
                         body: JSON.stringify({
                             access_key: web3FormsKey,
-                            subject: "New Contact Form Enquiry - Pi Robo",
+                            subject: "New Contact Form Enquiry - Pi Bots",
                             from_name: data.name,
                             email: data.email,
                             phone: data.phone,
@@ -70,7 +70,7 @@ const Contact = () => {
 
     return (
         <div className="bg-gray-50 dark:bg-black transition-colors duration-500 min-h-screen py-12 relative overflow-hidden">
-            <SEO title="Contact Us" description="Get in touch with Pi Robo. We're here to answer any questions about our robotics courses, workshops, or partnerships." />
+            <SEO title="Contact Us" description="Get in touch with Pi Bots. We're here to answer any questions about our robotics courses, workshops, or partnerships." />
             {/* Ambient Background Glow */}
             <div className="absolute top-20 right-1/4 w-[400px] h-[400px] bg-orange-600/10 rounded-full blur-[100px] pointer-events-none"></div>
             <div className="absolute bottom-20 left-1/4 w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none"></div>

@@ -76,7 +76,7 @@ const ManageInternships = () => {
             // Header
             doc.setFontSize(22);
             doc.setTextColor(249, 115, 22); // Orange
-            doc.text("Pi Robo - Internship Application", 14, 25);
+            doc.text("Pi Bots - Internship Application", 14, 25);
             
             doc.setFontSize(10);
             doc.setTextColor(100, 100, 100);
@@ -124,8 +124,8 @@ const ManageInternships = () => {
             const pageHeight = doc.internal.pageSize.height;
             doc.setFontSize(9);
             doc.setTextColor(150, 150, 150);
-            doc.text("Pi Robo Education - Transforming the Future with Technology", 14, pageHeight - 15);
-            doc.text("www.pirobo.com", 196, pageHeight - 15, { align: 'right' });
+            doc.text("Pi Bots Education - Transforming the Future with Technology", 14, pageHeight - 15);
+            doc.text("www.pibots.in", 196, pageHeight - 15, { align: 'right' });
 
             doc.save(`Internship_Application_${app.name.replace(/\s+/g, '_')}.pdf`);
         } catch (error) {

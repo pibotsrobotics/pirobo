@@ -42,7 +42,7 @@ const Sidebar = () => {
                 className="h-16 flex-shrink-0 flex items-center px-6 border-b border-gray-200 dark:border-white/5 bg-gray-50/50 dark:bg-black/20 sticky top-0 z-10"
             >
                 <h2 className="text-xl font-extrabold text-gray-900 dark:text-white tracking-wider flex items-center gap-2">
-                    Pi Robo{' '}
+                    Pi Bots{' '}
                     <motion.span
                         animate={{ opacity: [0.7, 1, 0.7] }}
                         transition={{ repeat: Infinity, duration: 2.5, ease: 'easeInOut' }}

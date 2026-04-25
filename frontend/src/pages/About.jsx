@@ -186,17 +186,17 @@ const About = () => {
 
 
     const timeline = [
-        { year: '2017', title: 'The Beginning', desc: 'Pi Robo was born — starting with a small passionate workshop to bring robotics and AI education to students.' },
+        { year: '2017', title: 'The Beginning', desc: 'Pi Bots was born — starting with a small passionate workshop to bring robotics and AI education to students.' },
         { year: '2019', title: 'Growing Momentum', desc: 'Expanded our workshops to reach more students across Kerala, running hands-on sessions in robotics, coding, and electronics.' },
         { year: '2021', title: 'Online & Offline', desc: 'Launched both online and offline learning formats, making quality tech education accessible to students everywhere — no boundaries.' },
         { year: '2023', title: 'School Partnerships', desc: 'Collaborated with schools and colleges to integrate practical robotics and AI modules into their curriculum.' },
         { year: '2025', title: 'Scaling Up', desc: 'Grew our community significantly with more courses, workshops, and a dedicated team passionate about shaping the next generation of innovators.' },
-        { year: '2026', title: 'Follow Our Journey', desc: 'The story continues! Follow us on Instagram @pirobo.learning to stay updated on our latest workshops, events, and student achievements.', instagram: 'https://www.instagram.com/pirobo.learning' },
+        { year: '2026', title: 'Follow Our Journey', desc: 'The story continues! Follow us on Instagram @pibots.learning to stay updated on our latest workshops, events, and student achievements.', instagram: 'https://www.instagram.com/pibots.learning' },
     ];
 
     return (
         <div className="bg-gray-50 dark:bg-black transition-colors duration-500 min-h-screen relative overflow-hidden">
-            <SEO title="About Us" description="Learn about the passionate team behind Pi Robo and our mission to democratize robotics education." />
+            <SEO title="About Us" description="Learn about the passionate team behind Pi Bots and our mission to democratize robotics education." />
             {/* Ambient Glows - cheap opacity-only compositing */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-600/8 rounded-full blur-[80px] pointer-events-none" style={{willChange:'auto'}}></div>
             <div className="absolute top-[40%] left-0 w-[400px] h-[400px] bg-blue-600/8 rounded-full blur-[80px] pointer-events-none" style={{willChange:'auto'}}></div>
@@ -209,7 +209,7 @@ const About = () => {
                         animate={{ opacity: 1, y: 0 }}
                         className="text-5xl md:text-7xl font-extrabold text-gray-900 dark:text-white transition-colors mb-6 tracking-tight"
                     >
-                        We are <span className="text-orange-500 drop-shadow-[0_0_20px_rgba(249,115,22,0.5)]">Pi Robo</span>
+                        We are <span className="text-orange-500 drop-shadow-[0_0_20px_rgba(249,115,22,0.5)]">Pi Bots</span>
                     </motion.h1>
                     <p className="text-xl text-gray-600 dark:text-gray-400 transition-colors max-w-3xl mx-auto leading-relaxed">
                         A team of passionate engineers, educators, and innovators dedicated to democratizing tech education and making <span className="text-gray-900 dark:text-white transition-colors font-medium">Robotics, AI, and Coding</span> accessible to every student.
@@ -276,7 +276,7 @@ const About = () => {
                                                 className="inline-flex items-center gap-2 mt-3 px-3 py-1.5 rounded-full bg-gradient-to-r from-pink-500 to-orange-500 text-white text-xs font-bold hover:opacity-90 transition-all hover:scale-105"
                                             >
                                                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                                                Follow @pirobo.learning
+                                                Follow @pibots.learning
                                             </a>
                                         )}
                                     </motion.div>

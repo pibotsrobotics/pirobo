@@ -12,7 +12,7 @@ export const ThemeProvider = ({ children }) => {
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
             return 'light';
         }
-        return 'dark'; // Pi Robo default
+        return 'dark'; // Pi Bots default
     });
 
     useEffect(() => {

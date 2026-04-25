@@ -18,7 +18,7 @@ app.use(express.json());
 
 // Routes
 app.get('/', (req, res) => {
-  res.send('Pi Robo Backend API is Running');
+  res.send('Pi Bots Backend API is Running');
 });
 
 app.get('/health', (req, res) => {

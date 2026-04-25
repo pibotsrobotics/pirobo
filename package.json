@@ -1,5 +1,5 @@
 {
-    "name": "pi-robo-root",
+    "name": "pi-bots-root",
     "version": "1.0.0",
     "description": "Root package to proxy commands to frontend",
     "scripts": {

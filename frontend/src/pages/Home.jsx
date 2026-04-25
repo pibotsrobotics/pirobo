@@ -478,12 +478,12 @@ const UpcomingEvents = () => {
 
 const FAQ = () => {
     const faqData = [
-        { title: "What exactly does Pi Robo offer?", content: "We offer comprehensive hands-on tech education in Robotics, Artificial Intelligence, Coding, and IoT. Our programs range from beginner-friendly workshops to advanced industry-level internships for school and college students." },
+        { title: "What exactly does Pi Bots offer?", content: "We offer comprehensive hands-on tech education in Robotics, Artificial Intelligence, Coding, and IoT. Our programs range from beginner-friendly workshops to advanced industry-level internships for school and college students." },
         { title: "Do I need any prior coding or robotics experience?", content: "Not at all! Our curriculum is designed to accommodate everyone. We start with the absolute basics and guide you step-by-step through complex concepts using a 100% practical, hands-on approach." },
         { title: "Are the classes online or offline?", content: "We offer a flexible hybrid learning model. You can join our interactive sessions online from anywhere, or attend our offline practical workshops at our highly equipped PiBots Makerhub in Mampad, Kerala." },
-        { title: "Will I get a certificate after completing a course?", content: "Absolutely. Upon successful completion of any course, workshop, or internship, you will receive a verifiable, industry-recognized certificate from Pi Robo to boost your resume." },
+        { title: "Will I get a certificate after completing a course?", content: "Absolutely. Upon successful completion of any course, workshop, or internship, you will receive a verifiable, industry-recognized certificate from Pi Bots to boost your resume." },
         { title: "How does the Internship Program work?", content: "Our internship program gives you real-world experience working on live industry projects alongside expert mentors. Top performers are eligible for performance-based stipends and pre-placement offers." },
-        { title: "Can my school or college partner with Pi Robo?", content: "Yes! We actively collaborate with educational institutions across Kerala to integrate specialized robotics and AI modules directly into their curriculum. You can reach out to us via the Contact page for partnerships." },
+        { title: "Can my school or college partner with Pi Bots?", content: "Yes! We actively collaborate with educational institutions across Kerala to integrate specialized robotics and AI modules directly into their curriculum. You can reach out to us via the Contact page for partnerships." },
     ];
 
     return (
@@ -534,7 +534,7 @@ const CTA = () => {
             >
                 <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 tracking-tight">Ready to Start Your Tech Journey?</h2>
                 <p className="text-orange-100 text-xl max-w-2xl mx-auto mb-10 font-medium">
-                    Join thousands of students who have transformed their careers with Pi Robo.
+                    Join thousands of students who have transformed their careers with Pi Bots.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-6 justify-center">
                     <Link to="/courses">
