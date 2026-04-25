@@ -24,7 +24,7 @@ const FloatingContact = () => {
             await enquiryService.create({
                 name: 'Anonymous Visitor',
                 email: 'WhatsApp Intent',
-                phone: '+91 85472 44223',
+                phone: '+91 91884 11223',
                 interest: 'Direct WhatsApp Chat',
                 message: 'Visitor clicked the floating WhatsApp chat button to reach out.',
                 date: new Date().toLocaleDateString(),
@@ -54,7 +54,7 @@ const FloatingContact = () => {
                         </div>
                         <div className="p-4 space-y-3">
                             <a 
-                                href="https://wa.me/918547244223" 
+                                href="https://wa.me/919188411223" 
                                 target="_blank" 
                                 rel="noopener noreferrer"
                                 onClick={logWhatsAppClick}

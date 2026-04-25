@@ -24,7 +24,7 @@ const Footer = () => {
                                     <div className="w-8 h-8 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500 border border-orange-500/20">
                                         <Phone size={16} />
                                     </div>
-                                    <span className="text-gray-300 hover:text-orange-400 transition-colors cursor-pointer">+91 85472 44223</span>
+                                    <span className="text-gray-300 hover:text-orange-400 transition-colors cursor-pointer">+91 91884 11223</span>
                                 </li>
                                 <li className="flex items-center gap-3">
                                     <div className="w-8 h-8 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500 border border-orange-500/20">

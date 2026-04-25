@@ -248,7 +248,7 @@ const Courses = () => {
                         <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 transition-colors mb-1">Phone Number</label>
                         <Input
                             type="tel"
-                            placeholder="+91 85472 44223"
+                            placeholder="+91 91884 11223"
                             {...register('phone', { required: 'Phone is required' })}
                         />
                         {errors.phone && <span className="text-xs text-red-500">{errors.phone.message}</span>}

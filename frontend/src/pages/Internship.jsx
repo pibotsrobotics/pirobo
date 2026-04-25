@@ -154,7 +154,7 @@ const Internship = () => {
                                     <div>
                                         <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 transition-colors mb-2">Phone Number</label>
                                         <Input
-                                            placeholder="+91 85472 44223"
+                                            placeholder="+91 91884 11223"
                                             type="tel"
                                             className="bg-white dark:bg-black/50 border-gray-200 dark:border-white/10 text-gray-900 dark:text-white transition-colors placeholder-gray-500 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors"
                                             {...register('phone', { required: 'Phone is required' })}
