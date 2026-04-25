@@ -32,8 +32,8 @@ const Footer = () => {
                                     </div>
                                     <span className="text-gray-300 hover:text-orange-400 transition-colors cursor-pointer">pibotsacademy@gmail.com</span>
                                 </li>
-                                <li className="flex items-start gap-3">
-                                    <div className="w-8 h-8 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500 border border-orange-500/20 mt-1">
+                                <li className="flex items-center gap-3">
+                                    <div className="w-8 h-8 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500 border border-orange-500/20">
                                         <MapPin size={16} />
                                     </div>
                                     <span className="text-gray-300">Pibots Makerhub, Mampad, Kerala 676542</span>
