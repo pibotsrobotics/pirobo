@@ -3,11 +3,11 @@ import { Helmet } from 'react-helmet-async';
 
 const SEO = ({ 
   title, 
-  description = "Pi Bots - Master Robotics, AI & Coding. Empowering School & College Students with future-ready skills in Robotics, AI, Coding, and IoT.", 
-  keywords = "robotics, AI, coding, courses, workshops, internships, students, tech education, Pi Bots, Kerala, Makerhub",
+  description = "Pi BOTS - Master Robotics, AI & Coding. Empowering School & College Students with future-ready skills in Robotics, AI, Coding, and IoT.", 
+  keywords = "robotics, AI, coding, courses, workshops, internships, students, tech education, Pi BOTS, Kerala, Makerhub",
   url = "https://www.pibots.in",
 }) => {
-  const siteTitle = title ? `${title} | Pi Bots` : 'Pi Bots - Robotics & AI Education';
+  const siteTitle = title ? `${title} | Pi BOTS` : 'Pi BOTS - Robotics & AI Education';
 
   return (
     <Helmet>

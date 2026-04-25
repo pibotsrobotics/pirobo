@@ -186,7 +186,7 @@ const About = () => {
 
 
     const timeline = [
-        { year: '2017', title: 'The Beginning', desc: 'Pi Bots was born — starting with a small passionate workshop to bring robotics and AI education to students.' },
+        { year: '2017', title: 'The Beginning', desc: 'Pi BOTS was born — starting with a small passionate workshop to bring robotics and AI education to students.' },
         { year: '2019', title: 'Growing Momentum', desc: 'Expanded our workshops to reach more students across Kerala, running hands-on sessions in robotics, coding, and electronics.' },
         { year: '2021', title: 'Online & Offline', desc: 'Launched both online and offline learning formats, making quality tech education accessible to students everywhere — no boundaries.' },
         { year: '2023', title: 'School Partnerships', desc: 'Collaborated with schools and colleges to integrate practical robotics and AI modules into their curriculum.' },
@@ -209,7 +209,7 @@ const About = () => {
                         animate={{ opacity: 1, y: 0 }}
                         className="text-5xl md:text-7xl font-extrabold text-gray-900 dark:text-white transition-colors mb-6 tracking-tight"
                     >
-                        We are <span className="text-orange-500 drop-shadow-[0_0_20px_rgba(249,115,22,0.5)]">Pi Bots</span>
+                        We are <span className="text-orange-500 drop-shadow-[0_0_20px_rgba(249,115,22,0.5)]">Pi BOTS</span>
                     </motion.h1>
                     <p className="text-xl text-gray-600 dark:text-gray-400 transition-colors max-w-3xl mx-auto leading-relaxed">
                         A team of passionate engineers, educators, and innovators dedicated to democratizing tech education and making <span className="text-gray-900 dark:text-white transition-colors font-medium">Robotics, AI, and Coding</span> accessible to every student.

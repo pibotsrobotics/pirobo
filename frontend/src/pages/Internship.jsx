@@ -70,7 +70,7 @@ const Internship = () => {
                         animate={{ opacity: 1, y: 0 }}
                         className="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight text-gray-900 dark:text-white transition-colors"
                     >
-                        Launch Your Career with <span className="text-orange-500 drop-shadow-[0_0_20px_rgba(249,115,22,0.5)]">Pi Bots</span>
+                        Launch Your Career with <span className="text-orange-500 drop-shadow-[0_0_20px_rgba(249,115,22,0.5)]">Pi BOTS</span>
                     </motion.h1>
                     <p className="text-xl text-gray-600 dark:text-gray-400 transition-colors max-w-2xl mx-auto leading-relaxed">
                         Join our elite internship program. Work on cutting-edge technologies and build a portfolio that stands out.

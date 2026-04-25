@@ -38,7 +38,7 @@ const Navbar = () => {
                     <Link to="/" className="flex items-center gap-1 group flex-shrink-0">
                         <Logo className="h-12 w-12 transition-transform duration-300 group-hover:scale-110 flex-shrink-0" />
                         <span className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight whitespace-nowrap">
-                            Pi <span className="text-orange-500">Bots</span>
+                            Pi <span className="text-orange-500">BOTS</span>
                         </span>
                     </Link>
 

@@ -15,7 +15,7 @@ const Footer = () => {
                         <div>
                             <div className="flex items-center gap-1 mb-6">
                                 <Logo className="h-12 w-auto" forceTheme="dark" />
-                                <h3 className="text-2xl font-bold text-white tracking-tight">Pi <span className="text-orange-500">Bots</span></h3>
+                                <h3 className="text-2xl font-bold text-white tracking-tight">Pi <span className="text-orange-500">BOTS</span></h3>
                             </div>
                             <p className="text-gray-400 text-sm mb-6 leading-relaxed">
                                 Empowering the next generation of innovators with futuristic skills in Robotics, Artificial Intelligence, and Coding.
@@ -90,18 +90,18 @@ const Footer = () => {
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade"
                             className="absolute inset-0 grayscale contrast-125 opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
-                            title="Pi Bots Location"
+                            title="Pi BOTS Location"
                         ></iframe>
                         {/* Overlay to encourage interaction */}
                         <div className="absolute bottom-4 left-4 bg-black/80 px-3 py-1 text-xs text-white rounded backdrop-blur-sm pointer-events-none">
-                            Run by Pi Bots
+                            Run by Pi BOTS
                         </div>
                     </div>
 
                 </div>
 
                 <div className="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between text-sm text-gray-500">
-                    <div>&copy; {new Date().getFullYear()} Pi Bots. All rights reserved.</div>
+                    <div>&copy; {new Date().getFullYear()} Pi BOTS. All rights reserved.</div>
                     <div className="mt-4 md:mt-0 flex gap-6">
                         <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
                         <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
