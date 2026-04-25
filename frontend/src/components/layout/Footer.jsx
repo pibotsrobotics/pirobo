@@ -13,7 +13,8 @@ const Footer = () => {
                     {/* Left Side: Contact Info */}
                     <div className="space-y-8">
                         <div>
-                            <div className="mb-6">
+                            <div className="flex items-center gap-1 mb-6">
+                                <Logo className="h-12 w-auto" />
                                 <h3 className="text-2xl font-bold text-white tracking-tight">Pi <span className="text-orange-500">Bots</span></h3>
                             </div>
                             <p className="text-gray-400 text-sm mb-6 leading-relaxed">
