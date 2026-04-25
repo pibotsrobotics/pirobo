@@ -35,9 +35,9 @@ const Navbar = () => {
             <div className="container mx-auto px-4 md:px-6">
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
-                    <Link to="/" className="flex items-center gap-1 group">
-                        <Logo className="h-12 w-auto transition-transform duration-300 group-hover:scale-110" />
-                        <span className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
+                    <Link to="/" className="flex items-center gap-1 group flex-shrink-0">
+                        <Logo className="h-12 w-12 transition-transform duration-300 group-hover:scale-110 flex-shrink-0" />
+                        <span className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight whitespace-nowrap">
                             Pi <span className="text-orange-500">Bots</span>
                         </span>
                     </Link>
