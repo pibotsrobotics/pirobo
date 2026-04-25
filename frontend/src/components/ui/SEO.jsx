@@ -21,14 +21,14 @@ const SEO = ({
       <meta property="og:site_name" content="Pi BOTS" />
       <meta property="og:title" content={siteTitle} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content="https://www.pibots.in/logo-3.png" />
+      <meta property="og:image" content="https://www.pibots.in/logo-1.png" />
 
       {/* Twitter */}
       <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:url" content={url} />
       <meta property="twitter:title" content={siteTitle} />
       <meta property="twitter:description" content={description} />
-      <meta property="twitter:image" content="https://www.pibots.in/logo-3.png" />
+      <meta property="twitter:image" content="https://www.pibots.in/logo-1.png" />
 
       {/* Structured Data for Google Site Name */}
       <script type="application/ld+json">
