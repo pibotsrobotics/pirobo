@@ -1,0 +1,15 @@
+{
+  "short_name": "Pi BOTS",
+  "name": "Pi BOTS - Robotics & AI Education",
+  "icons": [
+    {
+      "src": "/logo-1.png",
+      "sizes": "192x192 512x512 4096x4096",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#F97316",
+  "background_color": "#000000"
+}
