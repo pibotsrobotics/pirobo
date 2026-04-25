@@ -24,7 +24,7 @@ export const ThemeProvider = ({ children }) => {
         // Update favicon dynamically
         const favicon = document.querySelector('link[rel="icon"]');
         if (favicon) {
-            favicon.href = theme === 'dark' ? '/logo%202.png' : '/Logo.png';
+            favicon.href = theme === 'dark' ? '/logo-2.png' : '/Logo.png';
         }
     }, [theme]);
 

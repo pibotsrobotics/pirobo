@@ -7,7 +7,7 @@ const Logo = ({ className = "h-8 w-auto", forceTheme, ...props }) => {
     
     return (
         <img 
-            src={effectiveTheme === 'dark' ? "/logo%202.png" : "/Logo.png"} 
+            src={effectiveTheme === 'dark' ? "/logo-2.png" : "/Logo.png"} 
             alt="Pi Bots Logo" 
             className={className}
             {...props}
